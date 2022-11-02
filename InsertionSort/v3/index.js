@@ -1,17 +1,21 @@
-class svgValue {
-    constructor(key, value, svg){
+/*
+    compare function
+    render function
+    remove function
+    swap function
+*/
+class rectObject {
+    constructor(key, value, svg) {
         this.key = key
         this.value = value
-        this.svgRect = svg.append('rect')
-            .attr('id', `svgRect-ind-${key}`)
-            .attr('class', `svgValue svgValue-val-${this.value}`)
-            .attr('width', this.xScale.bandwidth())
+        this.rectSvg = svg.append('rect')
+            .attr('id', `rect-object-${this.key}`)
+            .attr('class', 'rect-object')
             .attr('height', this.yScale(this.value))
-            .attr('x', this.xScale(this.key))
-            
+            .attr('width', this.xScale.bandwidth())
     }
-    yScale = d3.scaleLinear() //A[i] / domainMax * rangeMax
-        .domain([0, maxVal]) //Min and Max values the data should have
+    yScale = d3.scaleLinear()
+        .domain([0, maxVal])
         .range([0, svg.attr('height')])
 
     xScale = d3.scaleBand()
@@ -19,11 +23,16 @@ class svgValue {
         .range([0, svg.attr('width')])
         .paddingInner(0.12)
 }
+
+
+
+
 const numOfElements = 10;
 const maxVal = 50
 let rectObjArray = [] // Array of Rectangle SVG
 const rectSteps = [] // Array of Rect Order
 const colorSteps = [] // Array of Color Order
+const steps = []
 const svg = d3.select('#svg')
 /*
     Generate Array of Random Numbers
@@ -34,17 +43,15 @@ function reset() {
     //Remove Rect SVG Elements on the DOM
     if(rectObjArray.length > 0) {
         for(let i = 0; i < numOfElements; ++i){
-            rectObjArray[i].remove()
+            rectObjArray[i].rectSvg.remove()
         }
     }
+    //Clear rectObjectArray
     rectObjArray = []
-    for(let i = 0; i < numOfElements; ++i) {
-        const svgValueIndex = svg.append('rect')
-            .attr('')
 
-        
-        svgValue(i, Math.floor(Math.random() * maxVal) + 1, svg)
-        rectObjArray.push(svgValueIndex)
+    //Create rectObject and setup the array
+    for(let i = 0; i < numOfElements; ++i) {
+        rectObjArray.push(new rectObject(i, Math.floor(Math.random() * maxVal) + 1, svg))
     }
 
     //Sorting Algorithm
