@@ -24,7 +24,7 @@ class rectObject {
         .paddingInner(0.12)
 
     render(xPos, color) {
-        this.rectSvg
+        this.rectSvg.transition()
             .attr('x', this.xScale(xPos))
             .attr('fill', color)
     }
@@ -81,21 +81,36 @@ function reset() {
     const colorOrder = Array(numOfElements).fill(colorN)
     stepsObjArray.push(new stepsObject(0, rectOrder, colorOrder))
 
-    stepsObjArray[0].renderStep()
-    // renderSteps(stepsIndexArray[0])
-    /* Sorting Algorithm
-    for(let i = 1; i < rectObjArray.length; ++i) {
+    stepsObjArray[stepIndex].renderStep() //Render First Step
+
+    /* Sorting Algorithm */
+    for(let i = 1; i < numOfElements; ++i) {
+        const rectOrder = stepsObjArray[stepsObjArray.length - 1].rectOrder
+        const colorOrder = []
+        for(let c = 0; c < i; ++c) {
+            colorOrder.push(colorD)
+        }
+        colorOrder.push(colorI)
+        for(let c = i + 1; c < numOfElements; ++c) {
+            colorOrder.push(colorN) //Could be removed but change the render method to render only on colorStep.length
+        }
+        stepsObjArray.push(new stepsObject(stepsObjArray.length, rectOrder, colorOrder))
+
         //Var to keep arr[i] on memory
-        const valueIndex = rectObjectArray[i].value
+        const valueIndex = rectObjArray[i].value
         //Index J for the next loop
         var j = i - 1
     
-        while(j >= 0 && rectObjArray[j].value > valueIndex) {
-            arr[j + 1] = arr[j]
-            --j;
-            arr[j + 1] = valueIndex //Because of j-- on the while loop, we need to index at j + 1
+        // while(j >= 0 && rectObjArray[j].value > valueIndex) {
+        //     arr[j + 1] = arr[j]
+        //     --j;
+        //     arr[j + 1] = valueIndex //Because of j-- on the while loop, we need to index at j + 1
             
-        }
+        // }
     }
-    */
+}
+
+function next() {
+    ++stepIndex
+    stepsObjArray[stepIndex].renderStep()
 }
