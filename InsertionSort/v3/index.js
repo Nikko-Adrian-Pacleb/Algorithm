@@ -85,8 +85,9 @@ function reset() {
 
     /* Sorting Algorithm */
     for(let i = 1; i < numOfElements; ++i) {
-        const rectOrder = stepsObjArray[stepsObjArray.length - 1].rectOrder
-        const colorOrder = []
+        //No change in position, Color reset
+        let rectOrder = stepsObjArray[stepsObjArray.length - 1].rectOrder
+        let colorOrder = []
         for(let c = 0; c < i; ++c) {
             colorOrder.push(colorD)
         }
@@ -96,18 +97,18 @@ function reset() {
         }
         stepsObjArray.push(new stepsObject(stepsObjArray.length, rectOrder, colorOrder))
 
-        //Var to keep arr[i] on memory
-        const valueIndex = rectObjArray[i].value
         //Index J for the next loop
-        var j = i - 1
+        let j = i - 1
     
-        // while(j >= 0 && rectObjArray[j].value > valueIndex) {
-        //     arr[j + 1] = arr[j]
-        //     --j;
-        //     arr[j + 1] = valueIndex //Because of j-- on the while loop, we need to index at j + 1
-            
-        // }
+        while(j >= 0 && rectObjArray[rectOrder[j]].value > rectObjArray[rectOrder[j+1]].value) {
+            const index = rectOrder[j]
+            rectOrder[j] = rectOrder[j + 1]
+            rectOrder[j + 1] = index
+            --j
+        }
+        stepsObjArray.push(new stepsObject(stepsObjArray.length, rectOrder, colorOrder))
     }
+    console.log(stepsObjArray)
 }
 
 function next() {
