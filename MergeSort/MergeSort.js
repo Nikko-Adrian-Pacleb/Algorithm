@@ -1,7 +1,3 @@
-//Pseudo code on pg 36 of Book:Introduction to Algorithm 4th ed. MIT
-// const arr = [2, 4, 6, 7, 1, 2, 3, 5]
-const arr = [12, 3, 7, 9, 14, 6, 11, 2]
-
 function Merge(array, p, q, r) {
     const leftArray = array.slice(p, q + 1)
     const rightArray = array.slice(q + 1, r + 1)
@@ -35,16 +31,20 @@ function Merge(array, p, q, r) {
     }
 }
 
-function MergeSort(array, p, r) {
+function MergeSortRecursion(array, p, r) {
     if(p >= r) {
         return
     }
     const q = Math.floor((p + r) / 2)
-    MergeSort(array, p, q)
-    MergeSort(array, q + 1, r)
+    MergeSortRecursion(array, p, q)
+    MergeSortRecursion(array, q + 1, r)
 
     Merge(array, p, q, r)
 }
-console.log(arr)
-MergeSort(arr, 0, arr.length - 1)
-console.log(arr)
+
+function MergeSort(array) {
+    MergeSortRecursion(array, 0, array.length - 1)
+    return array
+}
+
+module.exports = MergeSort

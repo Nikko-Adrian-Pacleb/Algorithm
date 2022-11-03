@@ -1,0 +1,22 @@
+{
+  "name": "algorithm",
+  "version": "1.0.0",
+  "description": "Algorithm Visualization",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikko-Adrian-Pacleb/Algorithm.git"
+  },
+  "author": "Nikko Adrian Pacleb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nikko-Adrian-Pacleb/Algorithm/issues"
+  },
+  "homepage": "https://github.com/Nikko-Adrian-Pacleb/Algorithm#readme",
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
+}
