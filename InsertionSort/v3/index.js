@@ -22,18 +22,40 @@ class rectObject {
         .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         .range([0, svg.attr('width')])
         .paddingInner(0.12)
+
+    render(xPos, color) {
+        this.rectSvg
+            .attr('x', this.xScale(xPos))
+            .attr('fill', color)
+    }
 }
 
+class stepsObject {
+    constructor(stepNumber, rectOrder, colorOrder, rectObjArray) {
+        this.stepNumber = stepNumber
+        this.rectOrder = rectOrder
+        this.colorOrder = colorOrder
+        this.rectObjArray = rectObjArray
+    }
+    renderStep() {
+        for(let i = 0; i < numOfElements; ++i) {
+            rectObjArray[i].render(this.rectOrder[i], this.colorOrder[i])
+        }
+    }
+}
 
-
-
+//Constants
 const numOfElements = 10;
 const maxVal = 50
-let rectObjArray = [] // Array of Rectangle SVG
-const rectSteps = [] // Array of Rect Order
-const colorSteps = [] // Array of Color Order
-const steps = []
 const svg = d3.select('#svg')
+const colorN = 'yellow'
+const colorI = 'blue'
+const colorD = 'green'
+
+let stepIndex = 0
+let rectObjArray = [] // Array of Rectangle SVG
+let stepsObjArray = [] //Array of Steps Object
+
 /*
     Generate Array of Random Numbers
     Generate rect for SVG
@@ -46,26 +68,34 @@ function reset() {
             rectObjArray[i].rectSvg.remove()
         }
     }
-    //Clear rectObjectArray
-    rectObjArray = []
+    
+    rectObjArray = [] //Clear rectObjectArray
 
     //Create rectObject and setup the array
     for(let i = 0; i < numOfElements; ++i) {
         rectObjArray.push(new rectObject(i, Math.floor(Math.random() * maxVal) + 1, svg))
     }
-
-    //Sorting Algorithm
-    // for(let i = 1; i < rectObjArray.length; ++i) {
-    //     //Var to keep arr[i] on memory
-    //     const valueIndex = rectObjectArray[i].value
-    //     //Index J for the next loop
-    //     var j = i - 1
     
-    //     while(j >= 0 && rectObjArray[j].value > valueIndex) {
-    //         arr[j + 1] = arr[j]
-    //         --j;
-    //         arr[j + 1] = valueIndex //Because of j-- on the while loop, we need to index at j + 1
+    //Steps Obj Array Preparation
+    const rectOrder = Array.from(Array(numOfElements).keys())
+    const colorOrder = Array(numOfElements).fill(colorN)
+    stepsObjArray.push(new stepsObject(0, rectOrder, colorOrder))
+
+    stepsObjArray[0].renderStep()
+    // renderSteps(stepsIndexArray[0])
+    /* Sorting Algorithm
+    for(let i = 1; i < rectObjArray.length; ++i) {
+        //Var to keep arr[i] on memory
+        const valueIndex = rectObjectArray[i].value
+        //Index J for the next loop
+        var j = i - 1
+    
+        while(j >= 0 && rectObjArray[j].value > valueIndex) {
+            arr[j + 1] = arr[j]
+            --j;
+            arr[j + 1] = valueIndex //Because of j-- on the while loop, we need to index at j + 1
             
-    //     }
-    // }
+        }
+    }
+    */
 }
