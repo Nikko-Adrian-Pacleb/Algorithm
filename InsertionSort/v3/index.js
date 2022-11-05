@@ -23,9 +23,13 @@ class rectObject {
         .range([0, svg.attr('width')])
         .paddingInner(0.12)
 
-    render(xPos, color) {
-        this.rectSvg.transition()
+    renderRect(xPos){
+	this.rectSvg.transition()
             .attr('x', this.xScale(xPos))
+    }
+
+    renderColor(color) {
+        this.rectSvg
             .attr('fill', color)
     }
 }
@@ -37,10 +41,19 @@ class stepsObject {
         this.colorOrder = colorOrder
         this.rectObjArray = rectObjArray
     }
+    
     renderStep() {
-        for(let i = 0; i < numOfElements; ++i) {
-            rectObjArray[i].render(this.rectOrder[i], this.colorOrder[i])
-        }
+	    if(this.colorOrder == -1) {
+		    for(let i = 0; i < numOfElements; ++i) {
+                rectObjArray[this.rectOrder[i]].renderRect(i)
+            }	
+	    }
+        else {
+	        for(let i = 0; i < numOfElements; ++i) {
+                rectObjArray[this.rectOrder[i]].renderRect(i)
+		    	rectObjArray[this.rectOrder[i]].renderColor(this.colorOrder[i])
+            }
+	    }
     }
 }
 
@@ -77,6 +90,8 @@ function reset() {
     }
     
     //Steps Obj Array Preparation
+    stepsObjArray = []
+    stepIndex = 0
     const rectOrder = Array.from(Array(numOfElements).keys())
     const colorOrder = Array(numOfElements).fill(colorN)
     stepsObjArray.push(new stepsObject(0, rectOrder, colorOrder))
@@ -86,7 +101,7 @@ function reset() {
     /* Sorting Algorithm */
     for(let i = 1; i < numOfElements; ++i) {
         //No change in position, Color reset
-        let rectOrder = stepsObjArray[stepsObjArray.length - 1].rectOrder
+        let rectOrder = [...stepsObjArray[stepsObjArray.length - 1].rectOrder]
         let colorOrder = []
         for(let c = 0; c < i; ++c) {
             colorOrder.push(colorD)
@@ -95,7 +110,7 @@ function reset() {
         for(let c = i + 1; c < numOfElements; ++c) {
             colorOrder.push(colorN) //Could be removed but change the render method to render only on colorStep.length
         }
-        stepsObjArray.push(new stepsObject(stepsObjArray.length, rectOrder, colorOrder))
+        stepsObjArray.push(new stepsObject(stepsObjArray.length, [...rectOrder], [...colorOrder]))
 
         //Index J for the next loop
         let j = i - 1
@@ -105,9 +120,12 @@ function reset() {
             rectOrder[j] = rectOrder[j + 1]
             rectOrder[j + 1] = index
             --j
+	    
+	    stepsObjArray.push(new stepsObject(stepsObjArray.length, [...rectOrder], -1))	    
         }
-        stepsObjArray.push(new stepsObject(stepsObjArray.length, rectOrder, colorOrder))
+        
     }
+    stepsObjArray.push(new stepsObject(stepsObjArray.length, [...stepsObjArray[stepsObjArray.length - 1].rectOrder], [...colorOrder]))
     console.log(stepsObjArray)
 }
 
