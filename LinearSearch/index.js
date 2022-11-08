@@ -1,6 +1,13 @@
 class RectObj {
+    rect
     constructor(val) {
         this.val = val
+    }
+    renderRect(xPos) {
+        
+    }
+    renderColor(color) {
+
     }
 }
 
