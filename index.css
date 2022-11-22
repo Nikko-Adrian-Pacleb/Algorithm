@@ -1,0 +1,8 @@
+#container {
+    background-color: blue;
+    margin: auto;
+    width: 50%;
+}
+.selection-dropdown {
+    width: 100%;
+}
