@@ -1,23 +1,80 @@
+class RectVis {
+    //Constants
+    maxVal = 50
+    numOfElements = 10
+    
+    //Colors
+    colorN = '#F2E205'
+    colorI = '#F2A71B'
+    colorD = '#277FF2'
+
+    //Arrays
+    stepIndex = 0
+    rectObjArray = []
+
+    //Constructor
+    constructor(svg) {
+        this.svg = svg
+    }
+
+    //Remove RectSVG Elements on the DOM and Clear RectObjArray
+    ClearSVG() {
+        //Remove RectSVG on DOM
+        if(this.rectObjArray.length > 0) {
+            for(let i = 0; i < this.numOfElements; ++i) {
+                this.rectObjArray[i].remove()
+            }
+        }
+
+        this.rectObjArray = [] //Clear Array
+    }
+    
+    //Create RectObjs and save it to array
+    CreateRect() {
+        for(let i = 0; i < this.numOfElements; ++i) {
+            this.rectObjArray.push(new RectObj(this.svg, i, Math.floor(Math.random() * this.maxVal) + 1, this.maxVal))
+        }
+    }
+
+    SetupRect() {
+        this.ClearSVG()
+        this.CreateRect()
+    }
+}
 class RectObj {
-    constructor(value, svg) {
+    constructor(svg, key, value, maxVal) {
+        this.svg = svg
+        this.key = key
         this.value = value
+        this.maxVal = maxVal
         this.rectSvg = svg.append('rect')
-            .attr('id', `rect-object-${this.key}`)
+            .attr('id', `rect-object-${key}`)
             .attr('class', 'rect-object')
-            .attr('height', this.yScale(this.value))
+            .attr('height', this.yScale(value))
             .attr('width', this.xScale.bandwidth())
     }
+
+    // yScale = d3.scaleLinear()
+    //     .domain([0, this.maxVal])
+    //     .range([0, this.svg.attr('height')])
+
+    // xScale = d3.scaleBand()
+    //     .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    //     .range([0, this.svg.attr('width')])
+    //     .paddingInner(0.12)
+    
     yScale = d3.scaleLinear()
-        .domain([0, maxVal])
-        .range([0, svg.attr('height')])
+        .domain([0, this.maxVal])
+        .range([0, this.svg.attr('height')])
 
     xScale = d3.scaleBand()
         .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        .range([0, svg.attr('width')])
+        .range([0, this.svg.attr('width')])
         .paddingInner(0.12)
 
+
     renderRect(xPos){
-	this.rectSvg.transition()
+	    this.rectSvg.transition()
             .attr('x', this.xScale(xPos))
     }
 
