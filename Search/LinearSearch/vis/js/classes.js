@@ -1,3 +1,4 @@
+const svgs = d3.select('#svg')
 class RectVis {
     //Constants
     maxVal = 50
@@ -41,7 +42,7 @@ class RectVis {
         this.CreateRect()
     }
 }
-class RectObj {
+class RectObj{
     constructor(svg, key, value, maxVal) {
         this.svg = svg
         this.key = key
@@ -53,35 +54,26 @@ class RectObj {
             .attr('height', this.yScale(value))
             .attr('width', this.xScale.bandwidth())
     }
-
-    // yScale = d3.scaleLinear()
-    //     .domain([0, this.maxVal])
-    //     .range([0, this.svg.attr('height')])
-
-    // xScale = d3.scaleBand()
-    //     .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    //     .range([0, this.svg.attr('width')])
-    //     .paddingInner(0.12)
     
     yScale = d3.scaleLinear()
-        .domain([0, this.maxVal])
-        .range([0, this.svg.attr('height')])
+        .domain([0, 50]) //maxVal
+        .range([0, svgs.attr('height')]) //SVG Height
 
     xScale = d3.scaleBand()
         .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        .range([0, this.svg.attr('width')])
+        .range([0, svgs.attr('width')]) //SVG Width
         .paddingInner(0.12)
 
 
-    renderRect(xPos){
-	    this.rectSvg.transition()
-            .attr('x', this.xScale(xPos))
-    }
+    // renderRect(xPos){
+	//     this.rectSvg.transition()
+    //         .attr('x', this.xScale(xPos))
+    // }
 
-    renderColor(color) {
-        this.rectSvg
-            .attr('fill', color)
-    }
+    // renderColor(color) {
+    //     this.rectSvg
+    //         .attr('fill', color)
+    // }
 }
 class Steps {
     constructor(size) {
