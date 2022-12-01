@@ -1,4 +1,4 @@
-const svgs = d3.select('#vis-svg-linear')
+const LinearClassSVG = d3.select('#vis-svg-linear')
 class RectVis {
     //Constants
     maxVal = 50
@@ -12,10 +12,13 @@ class RectVis {
     //Arrays
     stepIndex = 0
     rectObjArray = []
+    
+    //Button Array
+    buttonArray = []
 
     //Constructor
-    constructor(svg) {
-        this.svg = svg
+    constructor(id) {
+        this.id = id
     }
 
     //Remove RectSVG Elements on the DOM and Clear RectObjArray
@@ -33,7 +36,7 @@ class RectVis {
     //Create RectObjs and save it to array
     CreateRect() {
         for(let i = 0; i < this.numOfElements; ++i) {
-            this.rectObjArray.push(new RectObj(this.svg, i, Math.floor(Math.random() * this.maxVal) + 1, this.maxVal))
+            this.rectObjArray.push(new RectObj(i, Math.floor(Math.random() * this.maxVal) + 1, this.maxVal))
         }
     }
 
@@ -41,14 +44,19 @@ class RectVis {
         this.ClearSVG()
         this.CreateRect()
     }
+
+    CreateButton(buttonId, buttonText, buttonFunction, xPos, yPos) {
+        const newButton = new SVGButton(this.id, buttonId, buttonText, buttonFunction, xPos, yPos)
+        this.buttonArray.push(newButton)
+    }
 }
 class RectObj{
-    constructor(svg, key, value, maxVal) {
-        this.svg = svg
+    constructor(key, value, maxVal) {
+
         this.key = key
         this.value = value
         this.maxVal = maxVal
-        this.rectSvg = svg.append('rect')
+        this.rectSvg = LinearClassSVG.append('rect')
             .attr('id', `rect-object-${key}`)
             .attr('class', 'rect-object')
             .attr('height', this.yScale(value))
@@ -57,11 +65,11 @@ class RectObj{
     
     yScale = d3.scaleLinear()
         .domain([0, 50]) //maxVal
-        .range([0, svgs.attr('height')]) //SVG Height
+        .range([0, LinearClassSVG.attr('height')]) //LinearClassSVG Height
 
     xScale = d3.scaleBand()
         .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        .range([0, svgs.attr('width')]) //SVG Width
+        .range([0, LinearClassSVG.attr('width')]) //LinearClassSVG Width
         .paddingInner(0.12)
 
 
@@ -101,5 +109,26 @@ class StepObj{
                 rectOrder[i].renderColor(colorOrder[i])
             }
         }
+    }
+}
+
+class SVGButton {
+    constructor(visId, buttonId,buttonText, xPos, yPos, buttonFunction) {
+        this.buttonText = buttonText
+        this.buttonFunction = buttonFunction
+        this.buttonGroup = LinearClassSVG.append('g')
+            .attr('class', 'svg-button')
+            .attr('id', `svg-button-${visId}-${buttonId}`)
+        this.buttonGroup.append("rect")
+            .attr('class', 'button-background')
+            .attr('x', xPos)
+            .attr('y', yPos)    
+            .attr('width', 100)
+            .attr('height', 57)
+        this.buttonGroup.append('text')
+            .attr('class', 'button-text')
+            .attr('x', xPos)
+            .attr('y', yPos)
+            .text(buttonText)
     }
 }

@@ -1,9 +1,11 @@
 // SVG Setup
-const svg = d3.select('#vis-svg-linear')
-const Vis = new RectVis(svg)
+const LinearVis = new RectVis("linear")
 function reset() {
-    Vis.ClearSVG()
-    Vis.CreateRect()
+    LinearVis.ClearSVG()
+    LinearVis.CreateRect()
+    LinearVis.CreateButton("TrialID", "TrialText", 200, 200, function() {
+        console.log("Button Created")
+    })
     // Vis.SetupRect()
 }
 
