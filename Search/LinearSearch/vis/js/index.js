@@ -1,7 +1,5 @@
-function RenderRect(numOfRect) {
-
-}
-const svg = d3.select('#svg')
+// SVG Setup
+const svg = d3.select('#vis-svg-linear')
 const Vis = new RectVis(svg)
 function reset() {
     Vis.ClearSVG()
