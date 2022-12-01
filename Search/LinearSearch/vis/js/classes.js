@@ -1,4 +1,4 @@
-const svgs = d3.select('#svg')
+const svgs = d3.select('#vis-svg-linear')
 class RectVis {
     //Constants
     maxVal = 50

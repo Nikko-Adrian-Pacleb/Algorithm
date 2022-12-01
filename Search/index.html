@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>Search Algorithm</title>
 </head>
 <body>
@@ -13,17 +14,17 @@
             <!-- a href empty -->
             <a href="" id="site-nav-logo">
                 <!-- img src,alt empty -->
-                <img src="" alt="">
+                <img src="" alt="Logo Here">
             </a>
         </div>
         <div id="right-nav">
             <div id="nav-group">
                 <!-- a href empty -->
-                <a href="" id="nav-home">Home</a>
+                <a href="" id="nav-home" class="nav-a-links">Home</a>
                 <!-- a href empty -->
-                <a href="" id="nav-about">About</a>
+                <a href="" id="nav-about" class="nav-a-links">About</a>
                 <!-- a href empty -->
-                <a href="" id="nav-contactt">Contact</a>
+                <a href="" id="nav-contactt" class="nav-a-links">Contact</a>
             </div>
         </div>
     </nav>
@@ -50,12 +51,15 @@
                     </div>
                     <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
                 </section>
+                <!-- Linear Search -->
                 <section id="linear-search-algorithm" class="subject-section">
                     <h3 class="section-title">Linear Search</h3>
                     <div class="vis-container">
-                        <svg id ="vis-svg-linear" class="vis-svg">
+                        <svg id ="vis-svg-linear" width="900" height="510" class="vis-svg">
 
                         </svg>
+                        <script src="./LinearSearch/vis/js/classes.js"></script>
+                        <script src="./LinearSearch/vis/js/index.js"></script>
                     </div>
                     <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
                 </section>

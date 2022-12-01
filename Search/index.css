@@ -1,10 +1,43 @@
+/* Colors:
+#000000
+#427094
+#949370
+#EDDBAD
+#FFFFFF
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #FFFFFF;
+}
 /* Nav */
 #site-nav {
-    background-color: lightblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #427094;
 }
 #left-nav {
-    background-color: lightgreen;
+    background-color: transparent;
 }
 #right-nav {
-    background-color: lightsalmon;
+    background-color: transparent;
+}
+
+.nav-a-links {
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+    text-decoration: none;
+}
+/* SVG Vis */
+.vis-svg {
+    width: 900px;
+    height: 510px;
+    background-color: red;
 }
