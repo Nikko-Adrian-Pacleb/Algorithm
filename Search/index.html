@@ -56,16 +56,23 @@
                     <h3 class="section-title">Linear Search</h3>
                     <div class="vis-container">
                         <div class="vis-extra">
-                            <button id="linear-reset">Reset</button>
-                            <button id="linear-next">Next</button>
-                            <p id="linear-steps-number"><span id="linear-step-number">0</span>/<span id="linear-total-steps">0</span></p>
-                            <button id="linear-previous">Previous</button>
+                            <button class="vis-extra-button" id="linear-vis-extra-button-reset">Reset</button>
+                            <button class="vis-extra-button" id="linear-vis-extra-button-next">Next</button>
+                            <p id="linear-vis-extra-p-steps" class="vis-extra-p"><span id="linear-vis-extra-span-current-step">0</span>/<span id="linear-vis-extra-span-total-steps">0</span></p>
+                            <button class="vis-extra-button" id="linear-vis-extra-button-previous">Previous</button>
+                        </div>
+                        <div class="vis-extra">
+                            <input type="number" class="vis-extra-input-number" id="linear-vis-extra-input-find"/>
+                            <button class="vis-extra-button" id="linear-vis-extra-button-find">Find</button>
                         </div>
                         <svg id ="vis-svg-linear" width="900" height="510" class="vis-svg">
 
                         </svg>
-                        <script src="./LinearSearch/vis/js/classes.js"></script>
-                        <script src="./LinearSearch/vis/js/index.js"></script>
+                        <!-- <script src="./LinearSearch/vis/js/classes.js"></script>
+                        <script src="./LinearSearch/vis/js/index.js"></script> -->
+
+                        <script src="./LinearSearch/visV2/js/classes.js"></script>
+                        <script src="./LinearSearch/visV2/js/index.js"></script>
                     </div>
                     <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
                 </section>
