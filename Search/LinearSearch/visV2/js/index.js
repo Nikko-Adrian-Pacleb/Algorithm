@@ -10,8 +10,8 @@ function LinearPrevious() {
     console.log('LP')
 }
 
-function LinearFind() {
-    console.log('LF')
+function LinearUpdate() {
+    console.log('LU')
 }
 const LinearRender = new Render()
 
