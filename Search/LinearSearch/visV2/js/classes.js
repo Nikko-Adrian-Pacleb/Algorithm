@@ -49,7 +49,12 @@ class Render{
 
     // Change the Value that the search algorithm is looking for
     SetValueToFind(value) {
-        this.SetValueToFind = value
+        this.ValueToFind = value
+        this.StepNumber = 0
+        this.StepsColor = []
+        this.GetStepsColor()
+        console.log(this.StepsColor)
+        this.RenderStepsColor(0)
     }
 
     // Generate the steps for colors and rect positions
@@ -77,12 +82,24 @@ class Render{
         return found
     }
 
+    //Increate Step Number and Render the next step
     GetNextStep() {
         if(this.StepNumber == this.StepsColor.length - 1){
             return
         }
         
         this.StepNumber++
+
+        this.RenderStepsColor(this.StepNumber)
+    }
+
+    //Increate Step Number and Render the previous step
+    GetPreviousStep() {
+        if(this.StepNumber == 0) {
+            return
+        }
+
+        this.StepNumber--
 
         this.RenderStepsColor(this.StepNumber)
     }

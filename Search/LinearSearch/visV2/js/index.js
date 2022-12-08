@@ -7,11 +7,12 @@ function LinearNext() {
 }
 
 function LinearPrevious() {
-    console.log('LP')
+    LinearRender.GetPreviousStep()
 }
 
 function LinearUpdate() {
-    console.log('LU')
+    const value = parseInt(document.getElementById("linear-vis-extra-input-find").value)
+    LinearRender.SetValueToFind(value)
 }
 const LinearRender = new Render()
 
