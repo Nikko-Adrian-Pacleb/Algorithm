@@ -15,8 +15,8 @@
 
 const Selection = {
     "selection": [
-        {"name": "Search", "website": "./Search"},
-        {"name": "Sort", "website": "./Sort"}
+        {"name": "Search", "website": "./Search/index.html"},
+        {"name": "Sort", "website": "./Sort/index.html"}
     ]
 }
 
@@ -29,7 +29,8 @@ function selectionSetup() {
         SelectionIndexDOM.id = `selection-choice-${Selection.selection[i].name}`
         SelectionIndexDOM.className = 'selection-dropdown'
         SelectionIndexDOM.addEventListener('click', function() {
-            
+            window.open(`${Selection.selection[i].website}`, "_self") //"_self" opens the site in the same tab
+            // window.open(`${Selection.selection[i].website}`, "_self")
         })
         SelectionDOM.appendChild(SelectionIndexDOM)
     }
