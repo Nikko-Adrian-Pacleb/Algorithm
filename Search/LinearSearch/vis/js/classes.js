@@ -1,9 +1,9 @@
 // Constants
-const svg = d3.select('#vis-svg-linear')
-const maxVal = 50
-const minVal = 20
+const svgLinear = d3.select('#vis-svg-linear')
+const maxValLinear = 50
+const minValLinear = 20
 
-class Render{
+class RenderLinear{
     colorNeutral = '#F2E205'
     colorIndex = '#F2A71B'
     colorFound = '#277FF2'
@@ -33,7 +33,7 @@ class Render{
     //Create RectObjs and save it to array
     CreateRectangles() {
         for(let i = 0; i < 10; ++i) {
-            this.RectangleArray.push(new Rectangle(i, Math.floor(Math.random() * (maxVal - minVal)) + minVal))
+            this.RectangleArray.push(new Rectangle(i, Math.floor(Math.random() * (maxValLinear - minValLinear)) + minValLinear))
         }
     }
 
@@ -116,7 +116,7 @@ class Rectangle{
     constructor(key, value) {
         this.key = key
         this.value = value
-        this.GroupSvg = svg.append('g')
+        this.GroupSvg = svgLinear.append('g')
         // Rectangle SVG
         this.RectangleSvg = this.GroupSvg.append('rect')
             .attr('id', `rect-object-${key}`)
@@ -133,12 +133,12 @@ class Rectangle{
     }
     
     yScale = d3.scaleLinear()
-        .domain([0, maxVal])
-        .range([0, svg.attr('height')])
+        .domain([0, maxValLinear])
+        .range([0, svgLinear.attr('height')])
 
     xScale = d3.scaleBand()
         .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        .range([0, svg.attr('width')])
+        .range([0, svgLinear.attr('width')])
         .paddingInner(0.12)
 
 

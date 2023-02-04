@@ -14,6 +14,6 @@ function LinearUpdate() {
     const value = parseInt(document.getElementById("linear-vis-extra-input-find").value)
     LinearRender.SetValueToFind(value)
 }
-const LinearRender = new Render()
+const LinearRender = new RenderLinear()
 
 LinearRender.SetupRectangles()
