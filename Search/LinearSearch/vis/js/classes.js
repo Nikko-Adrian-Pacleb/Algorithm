@@ -82,7 +82,7 @@ class RenderLinear{
         return found
     }
 
-    //Increate Step Number and Render the next step
+    //Increment Step Number and Render the next step
     GetNextStep() {
         if(this.StepNumber == this.StepsColor.length - 1){
             return
@@ -93,7 +93,7 @@ class RenderLinear{
         this.RenderStepsColor(this.StepNumber)
     }
 
-    //Increate Step Number and Render the previous step
+    //Decrement Step Number and Render the previous step
     GetPreviousStep() {
         if(this.StepNumber == 0) {
             return
