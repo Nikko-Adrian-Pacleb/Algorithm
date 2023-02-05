@@ -7,8 +7,9 @@ class RenderBinary {
     colorNeutral = '#F2E205'
     colorIndex = '#F2A71B'
     colorFound = '#277FF2'
+    colorDiscard = "#000000"
 
-    ValueToFind = 25
+    ValueToFind = 35
     
     StepNumber = 0
     RectangleArray = []
@@ -59,13 +60,106 @@ class RenderBinary {
         this.StepNumber = 0
         this.StepsColor = []
         this.GetStepsColor()
-        console.log(this.StepsColor)
+        // console.log(this.StepsColor)
         this.RenderStepsColor(0)
     }
 
     //Generate the steps for colors and rect positions
+    GetStepsColor() {
+        let found = false
+        // Color Initialization
+        const tempStepsColor = []
+        for(let i = 0; i < 10; ++i){
+            tempStepsColor.push(this.colorNeutral)
+        }
+        this.StepsColor.push([...tempStepsColor])
+        
+        if(this.BinarySearch(0, 10) != -1) {
+            found = true;
+        }
+    }
 
+    /* 
+    Binary Search Algorithm
+    Return -1 if the value is not found
+    Return the position in the array if the value is found
+    */
+    BinarySearch(low, high) {
+        if(low > high) {
+            const tempStepsColor = []
+            for(let i = 0; i < 10; ++i) {
+                tempStepsColor.push(this.colorDiscard)
+            }
+            this.StepsColor.push([...tempStepsColor])
+            return -1
+        }
+        else {
+            const tempStepsColor = []
+            const mid = Math.floor((low + high) / 2)
+            for(let i = 0; i < 10; ++i) {
+                if(i < low || i > high) {
+                    tempStepsColor.push(this.colorDiscard)
+                }
+                else if(i == mid){
+                    tempStepsColor.push(this.colorIndex)
+                }
+                else{
+                    tempStepsColor.push(this.colorNeutral)
+                }
+            }
+            this.StepsColor.push([...tempStepsColor])
 
+            if(this.RectangleArray[mid].value == this.ValueToFind){
+                for(let i = 0; i < 10; ++i) {
+                    if(i == mid) {
+                        tempStepsColor[i] = this.colorFound
+                    }
+                    else{
+                        tempStepsColor[i] = this.colorDiscard
+                    }
+                }
+                this.StepsColor.push([...tempStepsColor])
+                return mid
+            }
+            else {
+                if(this.ValueToFind > this.RectangleArray[mid].value){
+                    return this.BinarySearch( mid + 1, high)
+                }
+                else if(this.ValueToFind < this.RectangleArray[mid].value){
+                    return this.BinarySearch(low, mid - 1)
+                }
+            }
+        }
+    }
+
+    //Increment Step Number and Render the next step
+    GetNextStep() {
+        if(this.StepNumber == this.StepsColor.length - 1){
+            return
+        }
+        
+        this.StepNumber++
+
+        this.RenderStepsColor(this.StepNumber)
+    }
+
+    //Decrement Step Number and Render the previous step
+    GetPreviousStep() {
+        if(this.StepNumber == 0) {
+            return
+        }
+
+        this.StepNumber--
+
+        this.RenderStepsColor(this.StepNumber)
+    }
+
+    RenderStepsColor(index) {
+        const ColorSet = [...this.StepsColor[index]]
+        for(let i = 0; i < 10; ++i) {
+            this.RectangleArray[i].RenderColor(ColorSet[i])
+        }
+    }
 }
 
 class Rectangle{

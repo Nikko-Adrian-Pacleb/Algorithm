@@ -8,7 +8,7 @@ class RenderLinear{
     colorIndex = '#F2A71B'
     colorFound = '#277FF2'
 
-    ValueToFind = 25
+    ValueToFind = 35
     
     StepNumber = 0
     RectangleArray = []
@@ -53,7 +53,7 @@ class RenderLinear{
         this.StepNumber = 0
         this.StepsColor = []
         this.GetStepsColor()
-        console.log(this.StepsColor)
+        // console.log(this.StepsColor)
         this.RenderStepsColor(0)
     }
 
