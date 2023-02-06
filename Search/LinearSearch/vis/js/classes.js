@@ -33,7 +33,7 @@ class RenderLinear{
     //Create RectObjs and save it to array
     CreateRectangles() {
         for(let i = 0; i < 10; ++i) {
-            this.RectangleArray.push(new Rectangle(i, Math.floor(Math.random() * (maxValLinear - minValLinear)) + minValLinear))
+            this.RectangleArray.push(new LinearRectangle(i, Math.floor(Math.random() * (maxValLinear - minValLinear)) + minValLinear))
         }
     }
 
@@ -112,14 +112,14 @@ class RenderLinear{
     }
 }
 
-class Rectangle{
+class LinearRectangle{
     constructor(key, value) {
         this.key = key
         this.value = value
         this.GroupSvg = svgLinear.append('g')
         // Rectangle SVG
         this.RectangleSvg = this.GroupSvg.append('rect')
-            .attr('id', `rect-object-${key}`)
+            .attr('id', `linear-rect-object-${key}`)
             .attr('class', 'rect-object')
             .attr('height', this.yScale(value))
             .attr('width', this.xScale.bandwidth())

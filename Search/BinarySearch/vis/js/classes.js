@@ -40,7 +40,7 @@ class RenderBinary {
         }
         tempValues.sort()
         for(let i = 0; i < 10; ++i) {
-            this.RectangleArray.push(new Rectangle(i, tempValues[i]))
+            this.RectangleArray.push(new BinaryRectangle(i, tempValues[i]))
         }
     }
 
@@ -162,14 +162,14 @@ class RenderBinary {
     }
 }
 
-class Rectangle{
+class BinaryRectangle{
     constructor(key, value) {
         this.key = key
         this.value = value
         this.GroupSvg = svgBinary.append('g')
         // Rectangle SVG
         this.RectangleSvg = this.GroupSvg.append('rect')
-            .attr('id', `rect-object-${key}`)
+            .attr('id', `binary-rect-object-${key}`)
             .attr('class', 'rect-object')
             .attr('height', this.yScale(value))
             .attr('width', this.xScale.bandwidth())
