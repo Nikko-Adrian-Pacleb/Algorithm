@@ -5,10 +5,24 @@
     font-family: 'Maven Pro', sans-serif;
 }
 
+nav {
+    font-size: 24px;
+    text-decoration: none;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header {
+    margin: 50px 90px 0 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
 #container {
     background-color: blue;
     margin: auto;
-    width: 50%;
+    width: 80%;
 }
 .selection-dropdown {
     width: 100%;
