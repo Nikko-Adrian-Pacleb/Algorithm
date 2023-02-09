@@ -6,7 +6,7 @@
 }
 
 nav {
-    font-size: 24px;
+    font-size: 1.5rem;
     text-decoration: none;
     width: 50%;
     display: flex;
@@ -19,11 +19,38 @@ header {
     justify-content: space-between;
 }
 
-#container {
-    background-color: blue;
-    margin: auto;
-    width: 80%;
+#hero {
+    margin-top: 50px;
+    margin-left: 90px;
+    margin-right: 90px;
 }
-.selection-dropdown {
-    width: 100%;
+#title {
+    width: 50%;
+    font-size: 6rem;
+    padding-bottom: 20px;
+}
+#hero span{
+    font-size: 1.5rem;
+}
+#author {
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+#algorithms {
+    margin: 50px 90px 0 90px
+}
+#algorithms p {
+    font-size: 3rem;
+    text-align: center;
+}
+#selection {
+    display: flex;
+    justify-content: space-around;
+}
+
+.selection-choice {
+    cursor: pointer;
+    width: 450px;
+    background-color: red;
 }
