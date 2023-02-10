@@ -41,10 +41,16 @@ function selectionSetup() {
         const SelectionIndexDOM = document.createElement('div')
         SelectionIndexDOM.id=`selection-div-${Selection.selection[i].name}`
         SelectionIndexDOM.className = 'selection-choice'
-        SelectionIndexDOM.textContent = Selection.selection[i].name
         SelectionIndexDOM.addEventListener('click', function() {
             window.open(`${Selection.selection[i].website}`, "_self")
         })
+
+        const SelectionTextDOM = document.createElement('p')
+        SelectionTextDOM.id = `selection-text-${Selection.selection[i].name}`
+        SelectionTextDOM.className = 'selection-choice-text'
+        SelectionTextDOM.textContent = Selection.selection[i].name
+        SelectionIndexDOM.appendChild(SelectionTextDOM)
+
         SelectionDiv.appendChild(SelectionIndexDOM)
     }
 }

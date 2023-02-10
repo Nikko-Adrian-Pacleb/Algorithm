@@ -5,12 +5,20 @@
     font-family: 'Maven Pro', sans-serif;
 }
 
+.center-text {
+    text-align: center;
+}
+
 nav {
     font-size: 1.5rem;
     text-decoration: none;
     width: 50%;
     display: flex;
     justify-content: space-between;
+}
+nav a {
+    color: #47A2DF;
+    text-decoration: none;
 }
 
 header {
@@ -35,15 +43,14 @@ header {
 #author {
     font-size: 1.5rem;
     text-decoration: none;
+    color: #47A2DF;
 }
 
-#algorithms {
-    margin: 50px 90px 0 90px
-}
-#algorithms p {
+#algorithms{
+    margin: 50px 90px 0 90px;
     font-size: 3rem;
-    text-align: center;
 }
+
 #selection {
     display: flex;
     justify-content: space-around;
@@ -51,6 +58,22 @@ header {
 
 .selection-choice {
     cursor: pointer;
-    width: 450px;
-    background-color: red;
+    width: 400px;
+    height: 100px;
+    margin-top: 20px;
+    background-color: #47A2DF;
+    font-size: 3rem;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.selection-choice-text {
+    margin: auto;
+    color: white;
+    /* height: 100%;
+    padding-left: 15px;
+    padding-bottom: 3px;
+    display: flex;
+    align-items: flex-end; */
 }
