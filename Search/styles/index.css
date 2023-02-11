@@ -7,37 +7,47 @@
 */
 
 * {
-    box-sizing: border-box;
-    margin: 0;
     padding: 0;
-}
-body {
-    background-color: #FFFFFF;
-}
-/* Nav */
-#site-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-    background-color: #427094;
-}
-#left-nav {
-    background-color: transparent;
-}
-#right-nav {
-    background-color: transparent;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Maven Pro', sans-serif;
 }
 
-.nav-a-links {
-    font-weight: 500;
-    font-size: 16px;
-    color: #000000;
+/* Nav Bar */
+nav {
+    font-size: 1.5rem;
+    text-decoration: none;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+nav a {
+    color: #47A2DF;
     text-decoration: none;
 }
-/* SVG Vis */
+
+#nav-bar {
+    margin: 50px 90px 0 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Inside Nav Links */
+.subject-container {
+    margin: 50px 90px 0 90px;
+}
+.subject-container h1 {
+    font-size: 3rem;
+}
+.subject-container hr {
+    width: 50%;
+}
+
+
+/* SVG Vis
 .vis-svg {
     width: 900px;
     height: 510px;
     background-color: red;
-}
+} */
+
