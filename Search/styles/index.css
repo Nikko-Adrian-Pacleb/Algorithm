@@ -14,14 +14,14 @@
 }
 
 /* Nav Bar */
-nav {
+#nav-bar-nav {
     font-size: 1.5rem;
     text-decoration: none;
     width: 50%;
     display: flex;
     justify-content: space-between;
 }
-nav a {
+#nav-bar-nav a {
     color: #47A2DF;
     text-decoration: none;
 }
@@ -43,11 +43,32 @@ nav a {
     width: 50%;
 }
 
+#insite-nav {
+    width: 100%;
+    font-size: 1.5rem;
+}
 
-/* SVG Vis
+#insite-nav-header {
+    width: 100%;
+}
+
+#insite-nav ul {
+    padding-left: 40px;
+    font-size: 1.2rem;
+}
+
+/* SVG Vis */
 .vis-svg {
-    width: 900px;
+    /* width: 900px;
     height: 510px;
-    background-color: red;
-} */
+    background-color: red; */
+}
 
+
+section {
+    font-size: 1.2rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+}
