@@ -73,6 +73,35 @@ section {
     font-size: 1.5rem;
 }
 
+.vis-container hr {
+    margin: 40px;
+    width: 100%;
+}
+
+.vis-container {
+    width: 100%;
+}
+
+
+.vis-extra {
+    width: 900px;
+}
 .vis-extra-button {
+    cursor: pointer;
     font-size: 1.2rem;
+    padding: 6px;
+    color: white;
+    background-color: #47A2DF;
+    border: none;
+    margin-top: 2px;
+}
+
+.vis-extra-input-number {
+    font-size: 1.2rem;
+}
+
+.vis-svg-container  {
+    background-color: #47A2DF;
+    display: flex;
+    justify-content: center;
 }
