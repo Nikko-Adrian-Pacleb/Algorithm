@@ -70,7 +70,7 @@ section {
 }
 
 .section-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .vis-container hr {
@@ -80,11 +80,14 @@ section {
 
 .vis-container {
     width: 100%;
+    /* border: 1px solid #969696; */
 }
 
 
 .vis-extra {
-    width: 900px;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #969696;
 }
 .vis-extra-button {
     cursor: pointer;
@@ -101,7 +104,11 @@ section {
 }
 
 .vis-svg-container  {
-    background-color: #47A2DF;
-    display: flex;
-    justify-content: center;
+    padding: 5px;
+    border: 1px solid #969696;
+    width: 100%;
+}
+
+.vis-svg-container svg {
+    background-color: #D3D3D3;
 }
