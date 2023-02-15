@@ -33,12 +33,12 @@
                 </nav>
                 <section id="search-algorithm" class="subject-section">
                     <h3 class="section-title">About Search Algorithm</h3>
-                    <div class="vis-container" id="trial-svg-div">
+                    <!-- <div class="vis-container" id="trial-svg-div">
                         <svg id ="vis-svg-about" class="vis-svg">
 
                         </svg>
                     </div>
-                    <script src="./scripts/index.js"></script>
+                    <script src="./scripts/index.js"></script> -->
                     <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
                 </section>
                 <!-- Linear Search -->
@@ -74,11 +74,24 @@
                 <section id="binary-search-algorithm" class="subject-section">
                     <h3 class="section-title">Binary Search</h3>
                     <div class="vis-container">
-                        <svg id ="vis-svg-binary" width="900" height="510" class="vis-svg">
-
-                        </svg>
-                        <script src="./BinarySearch/scripts/classes.js"></script>
-                        <script src="./BinarySearch/scripts/index.js"></script>
+                        <div class="vis-extra">
+                            <button class="vis-extra-button" id="binary-vis-extra-button-reset" onclick="BinaryReset()">Reset</button>
+                            <button class="vis-extra-button" id="binary-vis-extra-button-previous" onclick="BinaryPrevious()">Previous</button>
+                            <span id="binary-vis-extra-span-current-step">0</span>
+                            <span>/</span>
+                            <span id="binary-vis-extra-span-total-steps">0</span>
+                            <button class="vis-extra-button" id="binary-vis-extra-button-next" onclick="BinaryNext()">Next</button>
+                            <p class="vis-extra-p">Update value to look for</p>
+                            <input type="number" class="vis-extra-input-number" id="binary-vis-extra-input-find" min="20" max="50" value="35"/>
+                            <button class="vis-extra-button" id="binary-vis-extra-button-find" onclick="BinaryUpdate()">Update</button>
+                        </div>
+                        <div class="vis-svg-container">
+                            <svg id ="vis-svg-binary" width="900" height="510" class="vis-svg">
+            
+                            </svg>
+                            <script src="./BinarySearch/scripts/classes.js"></script>
+                            <script src="./BinarySearch/scripts/index.js"></script>
+                        </div>
                     </div>
                     <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
                 </section>
