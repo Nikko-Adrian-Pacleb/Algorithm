@@ -70,22 +70,28 @@ section {
 }
 
 .section-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
     font-size: 2rem;
 }
 
-.vis-container hr {
+/* .vis-container hr {
     margin: 40px;
     width: 100%;
-}
+} */
 
 .vis-container {
     width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    /* justify-content: space-evenly; */
     /* border: 1px solid #969696; */
 }
 
 
 .vis-extra {
-    width: 100%;
+    /* width: 100%; */
     padding: 5px;
     border: 1px solid #969696;
 }
@@ -106,7 +112,7 @@ section {
 .vis-svg-container  {
     padding: 5px;
     border: 1px solid #969696;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .vis-svg-container svg {

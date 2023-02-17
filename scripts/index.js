@@ -16,7 +16,7 @@
 const Selection = {
     "selection": [
         {"name": "Search", "website": "./Search/index.html"},
-        {"name": "Sort", "website": "./Sort/index.html"}
+        {"name": "Sort(soon)", "website": "./Sort/index.html"}
     ]
 }
 
