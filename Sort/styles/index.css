@@ -1,0 +1,125 @@
+/* Colors:
+#000000
+#427094
+#949370
+#EDDBAD
+#FFFFFF
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Maven Pro', sans-serif;
+}
+
+/* Nav Bar */
+#nav-bar-nav {
+    font-size: 1.5rem;
+    text-decoration: none;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+#nav-bar-nav a {
+    color: #47A2DF;
+    text-decoration: none;
+}
+
+#nav-bar {
+    margin: 50px 90px 0 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Inside Nav Links */
+.subject-container {
+    margin: 50px 90px 0 90px;
+}
+.subject-container h1 {
+    font-size: 3rem;
+}
+.subject-container hr {
+    width: 50%;
+}
+
+#insite-nav {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+#insite-nav-header {
+    width: 100%;
+}
+
+#insite-nav ul {
+    padding-left: 40px;
+    font-size: 1.2rem;
+}
+
+#insite-nav a {
+    text-decoration: none;
+    color: #47A2DF;
+}
+
+/* SVG Vis */
+.vis-svg {
+    /* width: 900px;
+    height: 510px;
+    background-color: red; */
+}
+
+
+section {
+    font-size: 1.2rem;
+}
+
+.section-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+/* .vis-container hr {
+    margin: 40px;
+    width: 100%;
+} */
+
+.vis-container {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    /* justify-content: space-evenly; */
+    /* border: 1px solid #969696; */
+}
+
+
+.vis-extra {
+    /* width: 100%; */
+    padding: 5px;
+    border: 1px solid #969696;
+}
+.vis-extra-button {
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 6px;
+    color: white;
+    background-color: #47A2DF;
+    border: none;
+    margin-top: 2px;
+}
+
+.vis-extra-input-number {
+    font-size: 1.2rem;
+}
+
+.vis-svg-container  {
+    padding: 5px;
+    border: 1px solid #969696;
+    /* width: 100%; */
+}
+
+.vis-svg-container svg {
+    background-color: #D3D3D3;
+}

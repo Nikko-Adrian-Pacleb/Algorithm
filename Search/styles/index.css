@@ -57,6 +57,11 @@
     font-size: 1.2rem;
 }
 
+#insite-nav a {
+    text-decoration: none;
+    color: #47A2DF;
+}
+
 /* SVG Vis */
 .vis-svg {
     /* width: 900px;

@@ -4,30 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./styles/index.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>Search Algorithm</title>
 </head>
 <body>
-    <nav id="site-nav">
-        <div id="left-nav">
-            <!-- a href empty -->
-            <a href="" id="site-nav-logo">
-                <!-- img src,alt empty -->
-                <img src="" alt="Logo Here">
-            </a>
-        </div>
-        <div id="right-nav">
-            <div id="nav-group">
-                <!-- a href empty -->
-                <a href="" id="nav-home" class="nav-a-links">Home</a>
-                <!-- a href empty -->
-                <a href="" id="nav-about" class="nav-a-links">About</a>
-                <!-- a href empty -->
-                <a href="" id="nav-contactt" class="nav-a-links">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <header id="nav-bar">
+        <a href="https://nikko-adrian-pacleb.github.io/Algorithm/"><img src="../images/Vector.svg" alt="AltViz-Logo"></a>
+        
+        <!-- <nav id="nav-bar-nav">
+            <a href="">Algorithms</a>
+            <a href="">About</a>
+            <a href="">Developer</a>
+        </nav> -->
+    </header>
     <div id="sort-container" class="subject-container">
         <main id="site-main">
             <article id="site-article">
@@ -46,37 +36,40 @@
                 </nav>
                 <section id="sort-algorithm" class="subject-section">
                     <h3 class="section-title">About Sort Algorithm</h3>
-                    <div class="vis-container">
+                    <!-- <div class="vis-container">
                         <svg id ="vis-svg-about" class="vis-svg">
 
                         </svg>
-                    </div>
+                    </div> -->
                     <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
                 </section>
-                <!-- Linear Search  CHANGE!!!!!-->
-                <section id="linear-search-algorithm" class="subject-section">
-                    <h3 class="section-title">Linear Search</h3>
+                <!-- Insertion Sort -->
+                <section id="insertion-sort-algorithm" class="subject-section">
+                    <h3 class="section-title">Insertion Sort</h3>
+                    <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem id eum aspernatur suscipit incidunt accusamus explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis quisquam vitae cumque repellendus optio!</p>
                     <div class="vis-container">
-                        <div class="vis-extra">
-                            <button class="vis-extra-button" id="linear-vis-extra-button-reset">Reset</button>
-                            <button class="vis-extra-button" id="linear-vis-extra-button-next" onClick="LinearNext()">Next</button>
-                            <p id="linear-vis-extra-p-steps" class="vis-extra-p"><span id="linear-vis-extra-span-current-step">0</span>/<span id="linear-vis-extra-span-total-steps">0</span></p>
-                            <button class="vis-extra-button" id="linear-vis-extra-button-previous">Previous</button>
-                        </div>
-                        <div class="vis-extra">
-                            <input type="number" class="vis-extra-input-number" id="linear-vis-extra-input-find"/>
-                            <button class="vis-extra-button" id="linear-vis-extra-button-find">Find</button>
-                        </div>
-                        <svg id ="vis-svg-linear" width="900" height="510" class="vis-svg">
+                        <div class="vis-svg-container">
+                            <svg id ="vis-svg-insertion" width="900" height="510" class="vis-svg">
 
-                        </svg>
-                        <!-- <script src="./LinearSearch/vis/js/classes.js"></script>
-                        <script src="./LinearSearch/vis/js/index.js"></script> -->
-
-                        <script src="https://cdn.jsdelivr.net/gh/Nikko-Adrian-Pacleb/Algorithm/Search/LinearSearch/vis/js/classes.js"></script>
-                        <script src="./LinearSearch/vis/js/index.js"></script>
+                            </svg>
+                            
+                        </div><div class="vis-extra">
+                            <button class="vis-extra-button" id="insertion-vis-extra-button-reset" onclick="InsertionReset()">Reset</button>
+                            <span>Generate a new batch of array</span>
+                            <br>
+                            <button class="vis-extra-button" id="insertion-vis-extra-button-previous" onclick="InsertionPrevious()">Previous</button>
+                            <!-- <span id="linear-vis-extra-span-current-step">0</span>
+                            <span>/</span>
+                            <span id="linear-vis-extra-span-total-steps">0</span> -->
+                            <button class="vis-extra-button" id="insertion-vis-extra-button-next" onclick="InsertionNext()">Next</button>
+                            <br>
+                            <input type="number" class="vis-extra-input-number" id="insertion-vis-extra-input-find" min="20" max="50" value="35"/>
+                            <button class="vis-extra-button" id="insertion-vis-extra-button-find" onclick="InsertionUpdate()">Find</button>
+                            <span>Update the value the algorithm looks for</span>
+                        </div>
+                            <!-- <script src="./LinearSearch/scripts/classes.js"></script>
+                            <script src="./LinearSearch/scripts/index.js"></script> -->
                     </div>
-                    <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
                 </section>
                 <!-- Binary Search CHANGE!!!!!! -->
                 <section id="binary-search-algorithm" class="subject-section">
