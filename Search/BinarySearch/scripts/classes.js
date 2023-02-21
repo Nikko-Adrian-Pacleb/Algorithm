@@ -77,6 +77,8 @@ class RenderBinary {
         if(this.BinarySearch(0, 10) != -1) {
             found = true;
         }
+
+        return found
     }
 
     /* 
