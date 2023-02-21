@@ -121,7 +121,7 @@ function reset() {
             rectOrder[j + 1] = index
             --j
 	    
-	    stepsObjArray.push(new stepsObject(stepsObjArray.length, [...rectOrder], -1))	    
+	        stepsObjArray.push(new stepsObject(stepsObjArray.length, [...rectOrder], -1))	    
         }
         
     }
