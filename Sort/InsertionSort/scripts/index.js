@@ -24,7 +24,7 @@ class rectObject {
         .paddingInner(0.12)
 
     renderRect(xPos){
-	this.rectSvg.transition()
+	    this.rectSvg.transition()
             .attr('x', this.xScale(xPos))
     }
 
@@ -92,6 +92,9 @@ function reset() {
     //Steps Obj Array Preparation
     stepsObjArray = []
     stepIndex = 0
+    // console.log(Array(numOfElements))
+    // console.log(Array(numOfElements).keys())
+    // console.log(Array.from(Array(numOfElements).keys()))
     const rectOrder = Array.from(Array(numOfElements).keys())
     const colorOrder = Array(numOfElements).fill(colorN)
     stepsObjArray.push(new stepsObject(0, rectOrder, colorOrder))
@@ -101,6 +104,7 @@ function reset() {
     /* Sorting Algorithm */
     for(let i = 1; i < numOfElements; ++i) {
         //No change in position, Color reset
+        console.log([...stepsObjArray[stepsObjArray.length - 1].rectOrder])
         let rectOrder = [...stepsObjArray[stepsObjArray.length - 1].rectOrder]
         let colorOrder = []
         for(let c = 0; c < i; ++c) {
