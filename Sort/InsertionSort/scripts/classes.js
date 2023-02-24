@@ -18,6 +18,7 @@ class RenderInsertion{
     stepNumber = 0
     RectangleArray = []
     StepsColor = []
+    RectOrder = []
 
     constructor() {
 
@@ -54,6 +55,33 @@ class RenderInsertion{
 
     // Generate the steps for colors and rect positions
     GetStepsColor() {
+        for(let i = 1; i < this.numOfElements; ++i) {
+            let RectOrderIndex = [...RectOrder[this.RectOrder.length - 1]]
+            let StepsColorIndex = []
+
+            for(let c = 0; c < i; ++c) {
+                StepsColorIndex.push(this.colorDone)
+            }
+            StepsColorIndex.push(this.colorIndex)
+            for(let c = i + 1; i < this.numOfElements; ++i) {
+                StepsColorIndex.push(this.colorNeutral)
+            }
+            this.RectOrder.push([...RectOrderIndex])
+            this.StepsColor.push([...StepsColorIndex])
+
+            let j = i - 1
+            while(j >= 0 && rectObjArray[this.RectOrder[j]]. value > rectObjArray[this.RectOrder[j+1]].value) {
+                const index = RectOrderIndex[j]
+                RectOrderIndex[j] = RectOrderIndex[j + 1]
+                RectOrderIndex[j + 1] = index
+                --j
+
+                this.RectOrder.push
+            }
+        }
+
+        let RectOrderIndex = [...]
+
         let found = false
         // Color Initialization
         const tempStepsColor = []
@@ -104,5 +132,52 @@ class RenderInsertion{
         for(let i = 0; i < 10; ++i) {
             this.RectangleArray[i].RenderColor(ColorSet[i])
         }
+    }
+}
+
+class InsertionRectangle{
+    constructor(key, value) {
+        this.key = key
+        this.value = value
+        this.GroupSvg = svgLinear.append('g')
+        // Rectangle SVG
+        this.RectangleSvg = this.GroupSvg.append('rect')
+            .attr('id', `linear-rect-object-${key}`)
+            .attr('class', 'rect-object')
+            .attr('height', this.yScale(value))
+            .attr('width', this.xScale.bandwidth())
+            .attr('x', this.xScale(this.key))
+        // Text SVG
+        this.TextSvg = this.GroupSvg.append('text')
+            .attr('y', 20)
+            .attr('x', this.xScale(this.key) + 5)
+            .text(`${this.value}`)
+            .style('fill', 'white')
+    }
+    
+    yScale = d3.scaleLinear()
+        .domain([0, maxValLinear])
+        .range([0, svgLinear.attr('height')])
+
+    xScale = d3.scaleBand()
+        .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .range([0, svgLinear.attr('width')])
+        .paddingInner(0.12)
+
+
+    RenderRect(xPos){
+	    this.rectSvg.transition()
+            .attr('x', this.xScale(xPos))
+    }
+
+    RenderColor(color) {
+        this.RectangleSvg
+            .attr('fill', color)
+    }
+}
+
+class StepsObject {
+    constructor(StepNumber, RectOrder, ColorOrder, RectObjArray) {
+        this.
     }
 }
