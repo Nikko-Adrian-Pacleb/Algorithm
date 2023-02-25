@@ -1,5 +1,10 @@
 // svg = d3.select('#svg')
-const svgInsertion = d3.select('vis-svg-insertion')
+
+//Constants
+const svgInsertion = d3.select('#vis-svg-insertion')
+const maxValInsertion = 50
+const minValInsertion = 20
+
 class RenderInsertion{
     //Constants
     // colorN = '#F2E205'
@@ -15,10 +20,10 @@ class RenderInsertion{
     // stepIndex = 0
     // rectObjArray = [] // Array of Rectangle SVG
     // stepsObjArray = [] //Array of Steps Object
-    stepNumber = 0
+    StepNumber = 0
     RectangleArray = []
-    StepsColor = []
-    RectOrder = []
+    ColorOrderArray = []
+    RectOrderArray = []
 
     constructor() {
 
@@ -39,7 +44,7 @@ class RenderInsertion{
     //Create RectObjs and save it to array
     CreateRectangles() {
         for(let i = 0; i < 10; ++i) {
-            this.RectangleArray.push(new LinearRectangle(i, Math.floor(Math.random() * (maxValLinear - minValLinear)) + minValLinear))
+            this.RectangleArray.push(new InsertionRectangle(i, Math.floor(Math.random() * (maxValInsertion - minValInsertion)) + minValInsertion))
         }
     }
 
@@ -47,73 +52,74 @@ class RenderInsertion{
     SetupRectangles() {
         this.ClearSVG()
         this.CreateRectangles()
-        this.StepsColor = []
+        this.RectOrderArray = []
+        this.ColorOrderArray = []
         this.GetStepsColor()
         this.StepNumber = 0
-        this.RenderStepsColor(this.StepNumber)
+        console.log(this.RectOrderArray)
+        console.log(this.ColorOrderArray)
+        this.RenderRectangleColorOrder(this.StepNumber)
+        // this.RenderColorOrder(this.StepNumber)
+        // this.RenderRectangleOrder(this.StepNumber)
     }
 
     // Generate the steps for colors and rect positions
     GetStepsColor() {
+        // console.log(Array(numOfElements))
+        // console.log(Array(numOfElements).keys())
+        // console.log(Array.from(Array(numOfElements).keys()))
+        const RectOrder = Array.from(Array(this.numOfElements).keys())
+        const ColorOrder = Array(this.numOfElements).fill(this.colorNeutral)
+
+        this.RectOrderArray.push([...RectOrder])
+        this.ColorOrderArray.push([...ColorOrder])
+
         for(let i = 1; i < this.numOfElements; ++i) {
-            let RectOrderIndex = [...RectOrder[this.RectOrder.length - 1]]
-            let StepsColorIndex = []
+            let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
+            let ColorOrderIndex = []
 
             for(let c = 0; c < i; ++c) {
-                StepsColorIndex.push(this.colorDone)
+                ColorOrderIndex.push(this.colorDone)
             }
-            StepsColorIndex.push(this.colorIndex)
-            for(let c = i + 1; i < this.numOfElements; ++i) {
-                StepsColorIndex.push(this.colorNeutral)
+            ColorOrderIndex.push(this.colorIndex)
+            for(let c = i + 1; c < this.numOfElements; ++c) {
+                ColorOrderIndex.push(this.colorNeutral)
             }
-            this.RectOrder.push([...RectOrderIndex])
-            this.StepsColor.push([...StepsColorIndex])
+            this.RectOrderArray.push([...RectOrderIndex])
+            this.ColorOrderArray.push([...ColorOrderIndex])
 
             let j = i - 1
-            while(j >= 0 && rectObjArray[this.RectOrder[j]]. value > rectObjArray[this.RectOrder[j+1]].value) {
+            while(j >= 0 && this.RectangleArray[RectOrderIndex[j]].value > this.RectangleArray[RectOrderIndex[j+1]].value) {
                 const index = RectOrderIndex[j]
                 RectOrderIndex[j] = RectOrderIndex[j + 1]
                 RectOrderIndex[j + 1] = index
                 --j
 
-                this.RectOrder.push
+                this.RectOrderArray.push([...RectOrderIndex])
+                this.ColorOrderArray.push([-1])
             }
+
+            this.RectOrderArray.push([...RectOrderIndex])
+            this.ColorOrderArray.push([...ColorOrderIndex])
         }
 
-        let RectOrderIndex = [...]
-
-        let found = false
-        // Color Initialization
-        const tempStepsColor = []
-        for(let i = 0; i < 10; ++i) {
-            tempStepsColor.push(this.colorNeutral)
-        }
-        this.StepsColor.push([...tempStepsColor])
-
-        for(let i = 0; i < 10; ++i) {
-            if(this.RectangleArray[i].value == this.ValueToFind) {
-                found = true
-                tempStepsColor[i] = this.colorFound
-                this.StepsColor.push([...tempStepsColor])
-            }
-            else {
-                tempStepsColor[i] = this.colorIndex
-                this.StepsColor.push([...tempStepsColor])
-            }
-        }
-
-        return found
+        this.RectOrderArray.push([...this.RectOrderArray[this.RectOrderArray.length - 1]])
+        this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
     }
 
     //Increment Step Number and Render the next step
     GetNextStep() {
-        if(this.StepNumber == this.StepsColor.length - 1){
+        if(this.StepNumber == this.ColorOrderArray.length - 1){
             return
         }
         
         this.StepNumber++
+        
+        // this.RenderColorOrder(this.StepNumber)
+        // this.RenderRectangleOrder(this.StepNumber)
+        this.RenderRectangleColorOrder(this.StepNumber)
 
-        this.RenderStepsColor(this.StepNumber)
+        document.getElementById("insertion-vis-extra-span-current-step").textContent = this.StepNumber
     }
 
     //Decrement Step Number and Render the previous step
@@ -127,19 +133,41 @@ class RenderInsertion{
         this.RenderStepsColor(this.StepNumber)
     }
 
-    RenderStepsColor(index) {
-        const ColorSet = [...this.StepsColor[index]]
+    RenderRectangleColorOrder(StepNumberIndex) {
+        const ColorOrder = [...this.ColorOrderArray[StepNumberIndex]]
+        const RectOrder = [...this.RectOrderArray[StepNumberIndex]]
+
         for(let i = 0; i < 10; ++i) {
-            this.RectangleArray[i].RenderColor(ColorSet[i])
+            if(ColorOrder[0] == -1){
+                this.RectangleArray[RectOrder[i]].RenderRect(i)
+            }
+            else {
+                this.RectangleArray[RectOrder[i]].RenderColor(ColorOrder[i])
+                this.RectangleArray[RectOrder[i]].RenderRect(i)
+            }
         }
     }
+
+    // RenderColorOrder(index) {
+    //     const ColorOrder = [...this.ColorOrderArray[index]]
+    //     for(let i = 0; i < 10; ++i) {
+    //         this.RectangleArray[ColorOrder].RenderColor(i)
+    //     }
+    // }
+
+    // RenderRectangleOrder(index) {
+    //     const RectOrder = [...this.RectOrderArray[index]]
+    //     for(let i = 0; i < 10; ++i) {
+    //         this.RectangleArray[RectOrder[i]].RenderRect(i)
+    //     }
+    // }
 }
 
 class InsertionRectangle{
     constructor(key, value) {
         this.key = key
         this.value = value
-        this.GroupSvg = svgLinear.append('g')
+        this.GroupSvg = svgInsertion.append('g')
         // Rectangle SVG
         this.RectangleSvg = this.GroupSvg.append('rect')
             .attr('id', `linear-rect-object-${key}`)
@@ -149,35 +177,29 @@ class InsertionRectangle{
             .attr('x', this.xScale(this.key))
         // Text SVG
         this.TextSvg = this.GroupSvg.append('text')
-            .attr('y', 20)
-            .attr('x', this.xScale(this.key) + 5)
-            .text(`${this.value}`)
-            .style('fill', 'white')
+        .attr('y', 20)
+        .attr('x', this.xScale(this.key) + 5)
+        .text(`${this.value}`)
+        .style('fill', 'white')
     }
     
     yScale = d3.scaleLinear()
-        .domain([0, maxValLinear])
-        .range([0, svgLinear.attr('height')])
+        .domain([0, maxValInsertion])
+        .range([0, svgInsertion.attr('height')])
 
     xScale = d3.scaleBand()
         .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        .range([0, svgLinear.attr('width')])
+        .range([0, svgInsertion.attr('width')])
         .paddingInner(0.12)
 
 
     RenderRect(xPos){
-	    this.rectSvg.transition()
+	    this.RectangleSvg.transition()
             .attr('x', this.xScale(xPos))
     }
 
     RenderColor(color) {
         this.RectangleSvg
             .attr('fill', color)
-    }
-}
-
-class StepsObject {
-    constructor(StepNumber, RectOrder, ColorOrder, RectObjArray) {
-        this.
     }
 }
