@@ -119,7 +119,7 @@ class RenderInsertion{
         // this.RenderRectangleOrder(this.StepNumber)
         this.RenderRectangleColorOrder(this.StepNumber)
 
-        document.getElementById("insertion-vis-extra-span-current-step").textContent = this.StepNumber
+        // document.getElementById("insertion-vis-extra-span-current-step").textContent = this.StepNumber
     }
 
     //Decrement Step Number and Render the previous step
@@ -130,7 +130,7 @@ class RenderInsertion{
 
         this.StepNumber--
 
-        this.RenderStepsColor(this.StepNumber)
+        this.RenderRectangleColorOrder(this.StepNumber)
     }
 
     RenderRectangleColorOrder(StepNumberIndex) {
