@@ -176,11 +176,11 @@ class InsertionRectangle{
             .attr('width', this.xScale.bandwidth())
             .attr('x', this.xScale(this.key))
         // Text SVG
-        this.TextSvg = this.GroupSvg.append('text')
-        .attr('y', 20)
-        .attr('x', this.xScale(this.key) + 5)
-        .text(`${this.value}`)
-        .style('fill', 'white')
+        // this.TextSvg = this.GroupSvg.append('text')
+        //     .attr('y', 20)
+        //     .attr('x', this.xScale(this.key) + 5)
+        //     .text(`${this.value}`)
+        //     .style('fill', 'white')
     }
     
     yScale = d3.scaleLinear()
