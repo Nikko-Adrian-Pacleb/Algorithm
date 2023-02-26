@@ -85,22 +85,29 @@ class RenderInsertion{
             for(let c = i + 1; c < this.numOfElements; ++c) {
                 ColorOrderIndex.push(this.colorNeutral)
             }
+
             this.RectOrderArray.push([...RectOrderIndex])
             this.ColorOrderArray.push([...ColorOrderIndex])
 
             let j = i - 1
             while(j >= 0 && this.RectangleArray[RectOrderIndex[j]].value > this.RectangleArray[RectOrderIndex[j+1]].value) {
-                const index = RectOrderIndex[j]
+                const indexRect = RectOrderIndex[j]
                 RectOrderIndex[j] = RectOrderIndex[j + 1]
-                RectOrderIndex[j + 1] = index
+                RectOrderIndex[j + 1] = indexRect
+
+                // const indexColor = ColorOrderIndex[j]
+                // ColorOrderIndex[j] = ColorOrderIndex[j + i]
+                // ColorOrderIndex[j + 1] = indexColor
+
                 --j
 
                 this.RectOrderArray.push([...RectOrderIndex])
                 this.ColorOrderArray.push([-1])
+                // this.ColorOrderArray.push([...ColorOrderIndex])
             }
 
-            this.RectOrderArray.push([...RectOrderIndex])
-            this.ColorOrderArray.push([...ColorOrderIndex])
+            // this.RectOrderArray.push([...RectOrderIndex])
+            // this.ColorOrderArray.push([...ColorOrderIndex])
         }
 
         this.RectOrderArray.push([...this.RectOrderArray[this.RectOrderArray.length - 1]])
