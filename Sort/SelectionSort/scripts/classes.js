@@ -1,11 +1,11 @@
 // svg = d3.select('#svg')
 
 //Constants
-const svgInsertion = d3.select('#vis-svg-insertion')
-const maxValInsertion = 50
-const minValInsertion = 20
+const svgSelection = d3.select('#vis-svg-selection')
+const maxValSelection = 50
+const minValSelection = 20
 
-class RenderInsertion{
+class RenderSelection{
     //Constants
     // colorN = '#F2E205'
     // colorI = '#F2A71B'
@@ -13,7 +13,7 @@ class RenderInsertion{
     colorNeutral = '#F2E205'
     colorIndex = '#F2A71B'
     colorDone = '#277FF2'
-    
+    colorSmallest = '#06D6A0'
     numOfElements = 10;
     maxVal = 50
 
@@ -43,8 +43,15 @@ class RenderInsertion{
     
     //Create RectObjs and save it to array
     CreateRectangles() {
-        for(let i = 0; i < 10; ++i) {
-            this.RectangleArray.push(new InsertionRectangle(i, Math.floor(Math.random() * (maxValInsertion - minValInsertion)) + minValInsertion))
+        // for(let i = 0; i < 10; ++i) {
+        //     this.RectangleArray.push(new SelectionRectangle(i, Math.floor(Math.random() * (maxValSelection - minValSelection)) + minValSelection))
+        // }
+
+        // Checking
+        this.RectangleArray.push(new SelectionRectangle(0, 11))
+        this.RectangleArray.push(new SelectionRectangle(1, 10))
+        for(let i = 2; i < this.numOfElements; ++i) {
+            this.RectangleArray.push(new SelectionRectangle(i, 10 + i))
         }
     }
 
@@ -68,48 +75,91 @@ class RenderInsertion{
         // console.log(Array(numOfElements))
         // console.log(Array(numOfElements).keys())
         // console.log(Array.from(Array(numOfElements).keys()))
-        const RectOrder = Array.from(Array(this.numOfElements).keys())
-        const ColorOrder = Array(this.numOfElements).fill(this.colorNeutral)
+        // const RectOrder = Array.from(Array(this.numOfElements).keys())
+        // const ColorOrder = Array(this.numOfElements).fill(this.colorNeutral)
 
-        this.RectOrderArray.push([...RectOrder])
-        this.ColorOrderArray.push([...ColorOrder])
+        // Initial Format
+        this.RectOrderArray.push(Array.from(Array(this.numOfElements).keys()))
+        this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
 
-        for(let i = 1; i < this.numOfElements; ++i) {
-            let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
-            let ColorOrderIndex = []
-
+        let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
+        let ColorOrderIndex = []
+        for(let i = 0; i < this.numOfElements; ++i){
+            // Get Initial Smallest
+            // RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
+            
+            ColorOrderIndex = []
             for(let c = 0; c < i; ++c) {
                 ColorOrderIndex.push(this.colorDone)
             }
-            ColorOrderIndex.push(this.colorIndex)
+            ColorOrderIndex.push(this.colorSmallest)
             for(let c = i + 1; c < this.numOfElements; ++c) {
                 ColorOrderIndex.push(this.colorNeutral)
             }
 
+            // !!!!!!!!!!!!!
+            console.log('for1s', RectOrderIndex)
             this.RectOrderArray.push([...RectOrderIndex])
             this.ColorOrderArray.push([...ColorOrderIndex])
 
-            let j = i - 1
-            while(j >= 0 && this.RectangleArray[RectOrderIndex[j]].value > this.RectangleArray[RectOrderIndex[j+1]].value) {
-                const indexRect = RectOrderIndex[j]
-                RectOrderIndex[j] = RectOrderIndex[j + 1]
-                RectOrderIndex[j + 1] = indexRect
-
-                // const indexColor = ColorOrderIndex[j]
-                // ColorOrderIndex[j] = ColorOrderIndex[j + i]
-                // ColorOrderIndex[j + 1] = indexColor
-
-                --j
-
+            let smallestIndex = i
+            let smallest = this.RectangleArray[RectOrderIndex[i]].value
+            for(let j = i + 1; j < this.numOfElements; ++j){
+                ColorOrderIndex = []
+                for(let c = 0; c < i; ++c) {
+                    ColorOrderIndex.push(this.colorDone)
+                }
+                for(let c = i; c < smallestIndex; ++c) {
+                    ColorOrderIndex.push(this.colorNeutral)
+                }
+                ColorOrderIndex.push(this.colorSmallest)
+                for(let c = smallestIndex + 1; c < j; ++c) {
+                    ColorOrderIndex.push(this.colorNeutral)
+                }
+                ColorOrderIndex.push(this.colorIndex)
+                for(let c = j + 1; c < this.numOfElements; ++c) {
+                    ColorOrderIndex.push(this.colorNeutral)
+                }
+                // RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
                 this.RectOrderArray.push([...RectOrderIndex])
-                this.ColorOrderArray.push([-1])
-                // this.ColorOrderArray.push([...ColorOrderIndex])
-            }
+                this.ColorOrderArray.push([...ColorOrderIndex])
 
-            // this.RectOrderArray.push([...RectOrderIndex])
-            // this.ColorOrderArray.push([...ColorOrderIndex])
+                if(this.RectangleArray[RectOrderIndex[j]].value < smallest) {
+                    smallestIndex = j
+                    smallest = this.RectangleArray[RectOrderIndex[j]].value
+
+                    // !!!!!!!!!!!!!
+                    console.log('smallerfound', RectOrderIndex)
+
+                    ColorOrderIndex = []
+                    for(let c = 0; c < i; ++c){
+                        ColorOrderIndex.push(this.colorDone)
+                    }
+                    for(let c = i; c < smallestIndex; ++c){
+                        ColorOrderIndex.push(this.colorNeutral)
+                    }
+                    ColorOrderIndex.push(this.colorSmallest)
+                    for(let c = smallestIndex + 1; c < this.numOfElements; ++c) {
+                        ColorOrderIndex.push(this.colorNeutral)
+                    }
+
+                    this.RectOrderArray.push([...RectOrderIndex])
+                    this.ColorOrderArray.push([...ColorOrderIndex])
+                }
+            }
+            //Swap
+            // !!!!!!!!!!!!!
+            console.log('beforeswap', RectOrderIndex)
+            console.log('sm', smallestIndex, `roi[${i}]`, RectOrderIndex[i], 'roi[sm]', RectOrderIndex[smallestIndex])
+            RectOrderIndex[smallestIndex] = RectOrderIndex[i]
+            RectOrderIndex[i] = smallestIndex
+            // !!!!!!!!!!!!!
+            console.log('afterswap', RectOrderIndex)
+            this.RectOrderArray.push([...RectOrderIndex])
+            this.ColorOrderArray.push([-1])
         }
 
+        // End Format
         this.RectOrderArray.push([...this.RectOrderArray[this.RectOrderArray.length - 1]])
         this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
     }
@@ -170,11 +220,11 @@ class RenderInsertion{
     // }
 }
 
-class InsertionRectangle{
+class SelectionRectangle{
     constructor(key, value) {
         this.key = key
         this.value = value
-        this.GroupSvg = svgInsertion.append('g')
+        this.GroupSvg = svgSelection.append('g')
         // Rectangle SVG
         this.RectangleSvg = this.GroupSvg.append('rect')
             .attr('id', `linear-rect-object-${key}`)
@@ -191,12 +241,12 @@ class InsertionRectangle{
     }
     
     yScale = d3.scaleLinear()
-        .domain([0, maxValInsertion])
-        .range([0, svgInsertion.attr('height')])
+        .domain([0, maxValSelection])
+        .range([0, svgSelection.attr('height')])
 
     xScale = d3.scaleBand()
         .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-        .range([0, svgInsertion.attr('width')])
+        .range([0, svgSelection.attr('width')])
         .paddingInner(0.12)
 
 
