@@ -43,15 +43,8 @@ class RenderSelection{
     
     //Create RectObjs and save it to array
     CreateRectangles() {
-        // for(let i = 0; i < 10; ++i) {
-        //     this.RectangleArray.push(new SelectionRectangle(i, Math.floor(Math.random() * (maxValSelection - minValSelection)) + minValSelection))
-        // }
-
-        // Checking
-        this.RectangleArray.push(new SelectionRectangle(0, 11))
-        this.RectangleArray.push(new SelectionRectangle(1, 10))
-        for(let i = 2; i < this.numOfElements; ++i) {
-            this.RectangleArray.push(new SelectionRectangle(i, 10 + i))
+        for(let i = 0; i < 10; ++i) {
+            this.RectangleArray.push(new SelectionRectangle(i, Math.floor(Math.random() * (maxValSelection - minValSelection)) + minValSelection))
         }
     }
 
@@ -151,8 +144,9 @@ class RenderSelection{
             // !!!!!!!!!!!!!
             console.log('beforeswap', RectOrderIndex)
             console.log('sm', smallestIndex, `roi[${i}]`, RectOrderIndex[i], 'roi[sm]', RectOrderIndex[smallestIndex])
+            const swapIndex = RectOrderIndex[smallestIndex]
             RectOrderIndex[smallestIndex] = RectOrderIndex[i]
-            RectOrderIndex[i] = smallestIndex
+            RectOrderIndex[i] = swapIndex
             // !!!!!!!!!!!!!
             console.log('afterswap', RectOrderIndex)
             this.RectOrderArray.push([...RectOrderIndex])
