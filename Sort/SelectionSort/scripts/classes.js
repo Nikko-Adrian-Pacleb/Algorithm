@@ -78,9 +78,6 @@ class RenderSelection{
         let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
         let ColorOrderIndex = []
         for(let i = 0; i < this.numOfElements; ++i){
-            // Get Initial Smallest
-            // RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
-            
             ColorOrderIndex = []
             for(let c = 0; c < i; ++c) {
                 ColorOrderIndex.push(this.colorDone)
@@ -90,8 +87,6 @@ class RenderSelection{
                 ColorOrderIndex.push(this.colorNeutral)
             }
 
-            // !!!!!!!!!!!!!
-            console.log('for1s', RectOrderIndex)
             this.RectOrderArray.push([...RectOrderIndex])
             this.ColorOrderArray.push([...ColorOrderIndex])
 
@@ -113,16 +108,12 @@ class RenderSelection{
                 for(let c = j + 1; c < this.numOfElements; ++c) {
                     ColorOrderIndex.push(this.colorNeutral)
                 }
-                // RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
                 this.RectOrderArray.push([...RectOrderIndex])
                 this.ColorOrderArray.push([...ColorOrderIndex])
 
                 if(this.RectangleArray[RectOrderIndex[j]].value < smallest) {
                     smallestIndex = j
                     smallest = this.RectangleArray[RectOrderIndex[j]].value
-
-                    // !!!!!!!!!!!!!
-                    console.log('smallerfound', RectOrderIndex)
 
                     ColorOrderIndex = []
                     for(let c = 0; c < i; ++c){
@@ -140,15 +131,27 @@ class RenderSelection{
                     this.ColorOrderArray.push([...ColorOrderIndex])
                 }
             }
+
+            ColorOrderIndex = []
+            for(let c = 0; c < i; ++c){
+                ColorOrderIndex.push(this.colorDone)
+            }
+            for(let c = i; c < smallestIndex; ++c){
+                ColorOrderIndex.push(this.colorNeutral)
+            }
+            ColorOrderIndex.push(this.colorSmallest)
+            for(let c = smallestIndex + 1; c < this.numOfElements; ++c) {
+                ColorOrderIndex.push(this.colorNeutral)
+            }
+
+            this.RectOrderArray.push([...RectOrderIndex])
+            this.ColorOrderArray.push([...ColorOrderIndex])
+
             //Swap
-            // !!!!!!!!!!!!!
-            console.log('beforeswap', RectOrderIndex)
-            console.log('sm', smallestIndex, `roi[${i}]`, RectOrderIndex[i], 'roi[sm]', RectOrderIndex[smallestIndex])
             const swapIndex = RectOrderIndex[smallestIndex]
             RectOrderIndex[smallestIndex] = RectOrderIndex[i]
             RectOrderIndex[i] = swapIndex
-            // !!!!!!!!!!!!!
-            console.log('afterswap', RectOrderIndex)
+
             this.RectOrderArray.push([...RectOrderIndex])
             this.ColorOrderArray.push([-1])
         }
