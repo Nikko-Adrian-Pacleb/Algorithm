@@ -5,21 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <title>Insertion Sort</title>
+    <title>Bubble Sort</title>
 </head>
 <body>
-    <section id="insertion-sort-algorithm" class="subject-section">
-        <h3 class="section-title">Insertion Sort</h3>
+    <section id="bubble-sort-algorithm" class="subject-section">
+        <h3 class="section-title">Bubble Sort</h3>
         <div class="vis-container">
             <div class="vis-extra">
-                <button class="vis-extra-button" id="insertion-vis-extra-button-reset" onclick="InsertionReset()">Reset</button>
-                <button class="vis-extra-button" id="insertion-vis-extra-button-previous" onclick="InsertionPrevious()">Previous</button>
-                <span id="insertion-vis-extra-span-current-step">0</span>
+                <button class="vis-extra-button" id="bubble-vis-extra-button-reset" onclick="BubbleReset()">Reset</button>
+                <button class="vis-extra-button" id="bubble-vis-extra-button-previous" onclick="BubblePrevious()">Previous</button>
+                <span id="bubble-vis-extra-span-current-step">0</span>
                 <span>/</span>
-                <span id="insertion-vis-extra-span-total-steps">0</span>
-                <button class="vis-extra-button" id="insertion-vis-extra-button-next" onclick="InsertionNext()">Next</button>
+                <span id="bubble-vis-extra-span-total-steps">0</span>
+                <button class="vis-extra-button" id="bubble-vis-extra-button-next" onclick="BubbleNext()">Next</button>
             </div>
-            <svg id ="vis-svg-insertion" width="900" height="510" class="vis-svg">
+            <svg id ="vis-svg-bubble" width="900" height="510" class="vis-svg">
 
             </svg>
             <!-- <script src="./LinearSearch/vis/js/classes.js"></script>
