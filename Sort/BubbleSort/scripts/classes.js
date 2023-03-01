@@ -161,8 +161,14 @@ class RenderBubble{
         this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
 
 
-        const n = array.length
-        for(let i = 0; i < n - 1; ++i) {
+        // Initial Format
+        this.RectOrderArray.push(Array.from(Array(this.numOfElements).keys()))
+        this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
+
+        let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
+        let ColorOrderIndex = []
+
+        for(let i = 0; i < this.numOfElements - 1; ++i) {
             for(j = n - 1; j > 0; --j) {
                 if(array[j] < array[j - 1]) {
                     const index = array[j]
