@@ -13,7 +13,7 @@ class RenderBubble{
     colorNeutral = '#F2E205'
     colorIndex = '#F2A71B'
     colorDone = '#277FF2'
-    colorSmallest = '#06D6A0'
+    colorSmallerFound = '#06D6A0'
     numOfElements = 10;
     maxVal = 50
 
@@ -65,102 +65,6 @@ class RenderBubble{
 
     // Generate the steps for colors and rect positions
     GetStepsColor() {
-        // console.log(Array(numOfElements))
-        // console.log(Array(numOfElements).keys())
-        // console.log(Array.from(Array(numOfElements).keys()))
-        // const RectOrder = Array.from(Array(this.numOfElements).keys())
-        // const ColorOrder = Array(this.numOfElements).fill(this.colorNeutral)
-
-        // Initial Format
-        this.RectOrderArray.push(Array.from(Array(this.numOfElements).keys()))
-        this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
-
-        let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
-        let ColorOrderIndex = []
-        for(let i = 0; i < this.numOfElements; ++i){
-            ColorOrderIndex = []
-            for(let c = 0; c < i; ++c) {
-                ColorOrderIndex.push(this.colorDone)
-            }
-            ColorOrderIndex.push(this.colorSmallest)
-            for(let c = i + 1; c < this.numOfElements; ++c) {
-                ColorOrderIndex.push(this.colorNeutral)
-            }
-
-            this.RectOrderArray.push([...RectOrderIndex])
-            this.ColorOrderArray.push([...ColorOrderIndex])
-
-            let smallestIndex = i
-            let smallest = this.RectangleArray[RectOrderIndex[i]].value
-            for(let j = i + 1; j < this.numOfElements; ++j){
-                ColorOrderIndex = []
-                for(let c = 0; c < i; ++c) {
-                    ColorOrderIndex.push(this.colorDone)
-                }
-                for(let c = i; c < smallestIndex; ++c) {
-                    ColorOrderIndex.push(this.colorNeutral)
-                }
-                ColorOrderIndex.push(this.colorSmallest)
-                for(let c = smallestIndex + 1; c < j; ++c) {
-                    ColorOrderIndex.push(this.colorNeutral)
-                }
-                ColorOrderIndex.push(this.colorIndex)
-                for(let c = j + 1; c < this.numOfElements; ++c) {
-                    ColorOrderIndex.push(this.colorNeutral)
-                }
-                this.RectOrderArray.push([...RectOrderIndex])
-                this.ColorOrderArray.push([...ColorOrderIndex])
-
-                if(this.RectangleArray[RectOrderIndex[j]].value < smallest) {
-                    smallestIndex = j
-                    smallest = this.RectangleArray[RectOrderIndex[j]].value
-
-                    ColorOrderIndex = []
-                    for(let c = 0; c < i; ++c){
-                        ColorOrderIndex.push(this.colorDone)
-                    }
-                    for(let c = i; c < smallestIndex; ++c){
-                        ColorOrderIndex.push(this.colorNeutral)
-                    }
-                    ColorOrderIndex.push(this.colorSmallest)
-                    for(let c = smallestIndex + 1; c < this.numOfElements; ++c) {
-                        ColorOrderIndex.push(this.colorNeutral)
-                    }
-
-                    this.RectOrderArray.push([...RectOrderIndex])
-                    this.ColorOrderArray.push([...ColorOrderIndex])
-                }
-            }
-
-            ColorOrderIndex = []
-            for(let c = 0; c < i; ++c){
-                ColorOrderIndex.push(this.colorDone)
-            }
-            for(let c = i; c < smallestIndex; ++c){
-                ColorOrderIndex.push(this.colorNeutral)
-            }
-            ColorOrderIndex.push(this.colorSmallest)
-            for(let c = smallestIndex + 1; c < this.numOfElements; ++c) {
-                ColorOrderIndex.push(this.colorNeutral)
-            }
-
-            this.RectOrderArray.push([...RectOrderIndex])
-            this.ColorOrderArray.push([...ColorOrderIndex])
-
-            //Swap
-            const swapIndex = RectOrderIndex[smallestIndex]
-            RectOrderIndex[smallestIndex] = RectOrderIndex[i]
-            RectOrderIndex[i] = swapIndex
-
-            this.RectOrderArray.push([...RectOrderIndex])
-            this.ColorOrderArray.push([-1])
-        }
-
-        // End Format
-        this.RectOrderArray.push([...this.RectOrderArray[this.RectOrderArray.length - 1]])
-        this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
-
-
         // Initial Format
         this.RectOrderArray.push(Array.from(Array(this.numOfElements).keys()))
         this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
@@ -169,16 +73,73 @@ class RenderBubble{
         let ColorOrderIndex = []
 
         for(let i = 0; i < this.numOfElements - 1; ++i) {
-            for(j = n - 1; j > 0; --j) {
-                if(array[j] < array[j - 1]) {
-                    const index = array[j]
-                    array[j] = array[j - 1]
-                    array[j - 1] = index
+            ColorOrderIndex = []
+            for(let c = 0; c < i; ++c) {
+                ColorOrderIndex.push(this.colorDone)
+            }
+            for(let c = i; c < this.numOfElements; ++c) {
+                ColorOrderIndex.push(this.colorNeutral)
+            }
+            this.RectOrderArray.push([...RectOrderIndex])
+            this.ColorOrderArray.push([...ColorOrderIndex])
+
+            for(let j = this.numOfElements - 1; j > i; --j) {
+                ColorOrderIndex = []
+                for(let c = 0; c < i; ++c) {
+                    ColorOrderIndex.push(this.colorDone)
+                }
+                for(let c = i; c < j - 1; ++c) {
+                    ColorOrderIndex.push(this.colorNeutral)
+                }
+                ColorOrderIndex.push(this.colorIndex) // j - 1
+                ColorOrderIndex.push(this.colorIndex) // j
+                for(let c = j; c < this.numOfElements; ++c) {
+                    ColorOrderIndex.push(this.colorNeutral)
+                }
+                this.RectOrderArray.push([...RectOrderIndex])
+                this.ColorOrderArray.push([...ColorOrderIndex])
+
+                if(this.RectangleArray[RectOrderIndex[j]].value < this.RectangleArray[RectOrderIndex[j - 1]].value) {
+                    ColorOrderIndex = []
+                    for(let c = 0; c < i; ++c) {
+                        ColorOrderIndex.push(this.colorDone)
+                    }
+                    for(let c = i; c < j - 1; ++c) {
+                        ColorOrderIndex.push(this.colorNeutral)
+                    }
+                    ColorOrderIndex.push(this.colorSmallerFound) // j - 1
+                    ColorOrderIndex.push(this.colorSmallerFound) // j
+                    for(let c = j; c < this.numOfElements; ++c) {
+                        ColorOrderIndex.push(this.colorNeutral)
+                    }
+                    this.RectOrderArray.push([...RectOrderIndex])
+                    this.ColorOrderArray.push([...ColorOrderIndex])
+
+                    const index = RectOrderIndex[j]
+                    RectOrderIndex[j] = RectOrderIndex[j - 1]
+                    RectOrderIndex[j - 1] = index
+
+                    ColorOrderIndex = []
+                    for(let c = 0; c < i; ++c) {
+                        ColorOrderIndex.push(this.colorDone)
+                    }
+                    for(let c = i; c < j - 1; ++c) {
+                        ColorOrderIndex.push(this.colorNeutral)
+                    }
+                    ColorOrderIndex.push(this.colorSmallerFound) // j - 1
+                    ColorOrderIndex.push(this.colorSmallerFound) // j
+                    for(let c = j; c < this.numOfElements; ++c) {
+                        ColorOrderIndex.push(this.colorNeutral)
+                    }
+                    this.RectOrderArray.push([...RectOrderIndex])
+                    this.ColorOrderArray.push([...ColorOrderIndex])
                 }
             }
         }
-        return array
 
+        // End Format
+        this.RectOrderArray.push([...this.RectOrderArray[this.RectOrderArray.length - 1]])
+        this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
     }
 
     //Increment Step Number and Render the next step
