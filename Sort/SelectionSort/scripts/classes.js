@@ -224,7 +224,7 @@ class SelectionRectangle{
         this.GroupSvg = svgSelection.append('g')
         // Rectangle SVG
         this.RectangleSvg = this.GroupSvg.append('rect')
-            .attr('id', `linear-rect-object-${key}`)
+            .attr('id', `selection-rect-object-${key}`)
             .attr('class', 'rect-object')
             .attr('height', this.yScale(value))
             .attr('width', this.xScale.bandwidth())

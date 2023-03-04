@@ -14,7 +14,7 @@ class RenderMerge{
     colorIndex = '#F2A71B'
     colorDone = '#277FF2'
     colorSmallerFound = '#06D6A0'
-    numOfElements = 10;
+    numOfElements = 8
     maxVal = 50
 
     // stepIndex = 0
@@ -204,18 +204,21 @@ class MergeRectangle{
         this.value = value
         this.GroupSvg = svgMerge.append('g')
         // Rectangle SVG
-        this.RectangleSvg = this.GroupSvg.append('rect')
-            .attr('id', `linear-rect-object-${key}`)
-            .attr('class', 'rect-object')
-            .attr('height', this.yScale(value))
-            .attr('width', this.xScale.bandwidth())
-            .attr('x', this.xScale(this.key))
+        // this.RectangleSvg = this.GroupSvg.append('rect')
+        //     .attr('id', `linear-rect-object-${key}`)
+        //     .attr('class', 'rect-object')
+        //     .attr('height', this.yScale(value))
+        //     .attr('width', this.xScale.bandwidth())
+        //     .attr('x', this.xScale(this.key))
         // Text SVG
         // this.TextSvg = this.GroupSvg.append('text')
         //     .attr('y', 20)
         //     .attr('x', this.xScale(this.key) + 5)
         //     .text(`${this.value}`)
         //     .style('fill', 'white')
+
+        this.SquareSvg = this.GroupSvg.append('rect')
+            .attr('id', ``)
     }
     
     yScale = d3.scaleLinear()

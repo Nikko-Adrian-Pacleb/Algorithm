@@ -205,7 +205,7 @@ class BubbleRectangle{
         this.GroupSvg = svgBubble.append('g')
         // Rectangle SVG
         this.RectangleSvg = this.GroupSvg.append('rect')
-            .attr('id', `linear-rect-object-${key}`)
+            .attr('id', `bubble-rect-object-${key}`)
             .attr('class', 'rect-object')
             .attr('height', this.yScale(value))
             .attr('width', this.xScale.bandwidth())
