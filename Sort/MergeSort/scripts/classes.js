@@ -44,6 +44,8 @@ class RenderMerge{
     //Create RectObjs and save it to array
     CreateRectangles() {
         const rectangleGroup = svgMerge.append('g')
+            .attr('id', 'merge-rectangle-group-1')
+        console.log(rectangleGroup)
         for(let i = 0; i < this.numOfElements; ++i) {
             this.RectangleArray.push(new MergeRectangle(i, Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge), rectangleGroup)
         }
@@ -200,10 +202,11 @@ class RenderMerge{
 }
 
 class MergeRectangle{
-    constructor(key, value, container) {
+    constructor(key, value, conatainerId) {
         this.key = key
         this.value = value
-        this.GroupSvg = this.container.append('g')
+        this.GroupSvg = d3.select('#merge-rectangle-group-1').append('g')
+        console.log(this.GroupSvg)
         // Rectangle SVG
         // this.RectangleSvg = this.GroupSvg.append('rect')
         //     .attr('id', `linear-rect-object-${key}`)
