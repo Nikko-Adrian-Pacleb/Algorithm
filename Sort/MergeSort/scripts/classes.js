@@ -43,8 +43,9 @@ class RenderMerge{
     
     //Create RectObjs and save it to array
     CreateRectangles() {
-        for(let i = 0; i < 10; ++i) {
-            this.RectangleArray.push(new MergeRectangle(i, Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge))
+        const rectangleGroup = svgMerge.append('g')
+        for(let i = 0; i < this.numOfElements; ++i) {
+            this.RectangleArray.push(new MergeRectangle(i, Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge), rectangleGroup)
         }
     }
 
@@ -199,10 +200,10 @@ class RenderMerge{
 }
 
 class MergeRectangle{
-    constructor(key, value) {
+    constructor(key, value, container) {
         this.key = key
         this.value = value
-        this.GroupSvg = svgMerge.append('g')
+        this.GroupSvg = this.container.append('g')
         // Rectangle SVG
         // this.RectangleSvg = this.GroupSvg.append('rect')
         //     .attr('id', `linear-rect-object-${key}`)
@@ -218,7 +219,11 @@ class MergeRectangle{
         //     .style('fill', 'white')
 
         this.SquareSvg = this.GroupSvg.append('rect')
-            .attr('id', ``)
+            .attr('id', `merge-rect-object-${key}`)
+            .attr('class', 'square-object')
+            .attr('height', 30)
+            .attr('width', 30)
+            .attr('x', this.xScale(this.key))
     }
     
     yScale = d3.scaleLinear()
