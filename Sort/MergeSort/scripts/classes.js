@@ -1,6 +1,8 @@
 // svg = d3.select('#svg')
 
 //Constants
+const svgWidth = 900
+const svgHeight = 510
 const svgMerge = d3.select('#vis-svg-merge')
 const maxValMerge = 50
 const minValMerge = 20
@@ -43,12 +45,96 @@ class RenderMerge{
     
     //Create RectObjs and save it to array
     CreateRectangles() {
-        const rectangleGroup = svgMerge.append('g')
-            .attr('id', 'merge-rectangle-group-1')
-        console.log(rectangleGroup)
-        for(let i = 0; i < this.numOfElements; ++i) {
-            this.RectangleArray.push(new MergeRectangle(i, Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge), rectangleGroup)
+        const squareWidth = svgWidth / 15
+        const marginX = squareWidth
+        const marginY = squareWidth * 1.5
+        let cursorX = 0
+        let cursorY = 0
+        
+        // //Level 0
+        // cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
+        // for(let i = 0; i < this.numOfElements; ++i) {
+        //     svgMerge.append('rect')
+        //         .attr('x', cursorX)
+        //         .attr('y', cursorY)
+        //         .attr('width', squareWidth)
+        //         .attr('height', squareWidth)
+        //     cursorX += squareWidth + 1
+        // }
+        
+        // //Level 1
+        // cursorY += squareWidth + 5 //1 Level Down
+        // //Left Group
+        // cursorX = svgWidth / 2 //Center
+        // cursorX -= margin //Move to the left by 1 margin
+        // cursorX -= (squareWidth * 4) + 7
+        // for(let left = 0; left < this.numOfElements/2; ++left) {
+        //     svgMerge.append('rect')
+        //         .attr('x', cursorX)
+        //         .attr('y', cursorY)
+        //         .attr('width', squareWidth)
+        //         .attr('height', squareWidth)
+        //     cursorX += squareWidth + 1
+        // }
+        // //Right Group
+        // cursorX = svgWidth / 2 //Center
+        // cursorX += margin //Move to the left by 1 margin
+        // for(let right = 0; right < this.numOfElements / 2; ++right) {
+        //     svgMerge.append('rect')
+        //         .attr('x', cursorX)
+        //         .attr('y', cursorY)
+        //         .attr('width', squareWidth)
+        //         .attr('height', squareWidth)
+        //     cursorX += squareWidth + 1
+        // }
+
+        //Level 2
+
+
+
+
+
+
+        let squareGroups = 1
+        //4 Levels of squares
+        for(let level = 0; level < 4; ++level) {
+            //Go down per level
+            cursorY = level * (marginY)
+            //Go to the middle of the svg
+            cursorX = (svgWidth / 2)
+
+            //Go left by margin * level
+            cursorX -= marginX * level
+            //Go left by squareWidth * number of elements / 2
+            cursorX -= squareWidth * (this.numOfElements / 2)
+            for(let group = 0; group < squareGroups; ++group) {
+                //Number of Squares per group is Number of Elements divided by twice of Square Groups numOfElements / (squareGroups * 2)
+                for(let square = 0; square < this.numOfElements / squareGroups; ++square) {
+                    svgMerge.append('rect')
+                        .attr('x', cursorX)
+                        .attr('y', cursorY)
+                        .attr('width', squareWidth)
+                        .attr('height', squareWidth)
+                    cursorX += squareWidth + 1
+                }
+                cursorX += squareWidth + 1
+            }
+            
+            //Twice Square Groups
+            squareGroups *= 2
         }
+
+
+
+        // for(let i = 0; i < this.numOfElements; ++i) {
+        //     this.RectangleArray.push(new MergeRectangle(i, Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge))
+        // }
+
+        // for(let i = 0; i < 4; ++i) {
+        //     const rectangleGroup = svgMerge.append('g')
+        //         .attr('id', `merge-rectangle-group-${i}`)
+            
+        // }
     }
 
     //Simple run of 2 functions to properly setup the svg and the rectangles
@@ -202,11 +288,10 @@ class RenderMerge{
 }
 
 class MergeRectangle{
-    constructor(key, value, conatainerId) {
+    constructor(key, value) {
         this.key = key
         this.value = value
-        this.GroupSvg = d3.select('#merge-rectangle-group-1').append('g')
-        console.log(this.GroupSvg)
+        this.GroupSvg = svgMerge.append('g')
         // Rectangle SVG
         // this.RectangleSvg = this.GroupSvg.append('rect')
         //     .attr('id', `linear-rect-object-${key}`)
