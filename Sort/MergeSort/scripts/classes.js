@@ -46,70 +46,39 @@ class RenderMerge{
     //Create RectObjs and save it to array
     CreateRectangles() {
         const squareWidth = svgWidth / 15
-        const marginX = squareWidth
+        const marginX = squareWidth / 2
         const marginY = squareWidth * 1.5
         let cursorX = 0
         let cursorY = 0
         
-        // //Level 0
-        // cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
-        // for(let i = 0; i < this.numOfElements; ++i) {
-        //     svgMerge.append('rect')
-        //         .attr('x', cursorX)
-        //         .attr('y', cursorY)
-        //         .attr('width', squareWidth)
-        //         .attr('height', squareWidth)
-        //     cursorX += squareWidth + 1
-        // }
-        
-        // //Level 1
-        // cursorY += squareWidth + 5 //1 Level Down
-        // //Left Group
-        // cursorX = svgWidth / 2 //Center
-        // cursorX -= margin //Move to the left by 1 margin
-        // cursorX -= (squareWidth * 4) + 7
-        // for(let left = 0; left < this.numOfElements/2; ++left) {
-        //     svgMerge.append('rect')
-        //         .attr('x', cursorX)
-        //         .attr('y', cursorY)
-        //         .attr('width', squareWidth)
-        //         .attr('height', squareWidth)
-        //     cursorX += squareWidth + 1
-        // }
-        // //Right Group
-        // cursorX = svgWidth / 2 //Center
-        // cursorX += margin //Move to the left by 1 margin
-        // for(let right = 0; right < this.numOfElements / 2; ++right) {
-        //     svgMerge.append('rect')
-        //         .attr('x', cursorX)
-        //         .attr('y', cursorY)
-        //         .attr('width', squareWidth)
-        //         .attr('height', squareWidth)
-        //     cursorX += squareWidth + 1
-        // }
+        // Level 0
+        cursorY = 40
+        cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
+        for(let i = 0; i < this.numOfElements; ++i) {
+            svgMerge.append('rect')
+                .attr('x', cursorX)
+                .attr('y', cursorY)
+                .attr('width', squareWidth)
+                .attr('height', squareWidth)
+            cursorX += squareWidth + 1
+        }
 
-        //Level 2
-
-
-
-
-
-
-        let squareGroups = 1
-        //4 Levels of squares
-        for(let level = 0; level < 4; ++level) {
+        cursorX = svgWidth / 2 
+        // Level 1 - 3
+        let squareGroupsPerSide = 1
+        let squarePerGroup = 4
+        for(let level = 1; level < 4; ++level) {
             //Go down per level
-            cursorY = level * (marginY)
+            cursorY = (level * marginY) + 40
             //Go to the middle of the svg
             cursorX = (svgWidth / 2)
 
-            //Go left by margin * level
-            cursorX -= marginX * level
-            //Go left by squareWidth * number of elements / 2
-            cursorX -= squareWidth * (this.numOfElements / 2)
-            for(let group = 0; group < squareGroups; ++group) {
-                //Number of Squares per group is Number of Elements divided by twice of Square Groups numOfElements / (squareGroups * 2)
-                for(let square = 0; square < this.numOfElements / squareGroups; ++square) {
+            //Print Left
+                //Go to left start
+            cursorX -= squareGroupsPerSide * marginX
+            cursorX -= 4 *  squareWidth
+            for(let group = 0; group  < squareGroupsPerSide; ++group) {
+                for(let square = 0; square < squarePerGroup; ++square) {
                     svgMerge.append('rect')
                         .attr('x', cursorX)
                         .attr('y', cursorY)
@@ -117,24 +86,31 @@ class RenderMerge{
                         .attr('height', squareWidth)
                     cursorX += squareWidth + 1
                 }
-                cursorX += squareWidth + 1
+                cursorX += marginX + 1
             }
-            
-            //Twice Square Groups
-            squareGroups *= 2
+
+            //Go to the middle of the svg
+            cursorX = (svgWidth / 2)
+
+            //Print Right
+                //Go to right start
+            cursorX += (marginX / 2) + 3
+            for(let group = 0; group  < squareGroupsPerSide; ++group) {
+                for(let square = 0; square < squarePerGroup; ++square) {
+                    svgMerge.append('rect')
+                        .attr('x', cursorX)
+                        .attr('y', cursorY)
+                        .attr('width', squareWidth)
+                        .attr('height', squareWidth)
+                    cursorX += squareWidth + 1
+                }
+                cursorX += marginX
+            }
+
+
+            squareGroupsPerSide *= 2
+            squarePerGroup /= 2
         }
-
-
-
-        // for(let i = 0; i < this.numOfElements; ++i) {
-        //     this.RectangleArray.push(new MergeRectangle(i, Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge))
-        // }
-
-        // for(let i = 0; i < 4; ++i) {
-        //     const rectangleGroup = svgMerge.append('g')
-        //         .attr('id', `merge-rectangle-group-${i}`)
-            
-        // }
     }
 
     //Simple run of 2 functions to properly setup the svg and the rectangles
