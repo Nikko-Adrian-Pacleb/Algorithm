@@ -5,7 +5,7 @@ const svgWidth = 900
 const svgHeight = 510
 const svgMerge = d3.select('#vis-svg-merge')
 const maxValMerge = 50
-const minValMerge = 20
+const minValMerge = 10
 
 class RenderMerge{
     //Constants
@@ -45,6 +45,11 @@ class RenderMerge{
     
     //Create RectObjs and save it to array
     CreateRectangles() {
+        for(let i = 0; i < this.numOfElements; ++i) {
+            this.RectangleArray.push(Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge)
+        }
+
+
         const squareWidth = svgWidth / 15
         const marginX = squareWidth / 2
         const marginY = squareWidth * 1.5
@@ -60,56 +65,13 @@ class RenderMerge{
                 .attr('y', cursorY)
                 .attr('width', squareWidth)
                 .attr('height', squareWidth)
+            svgMerge.append('text')
+                .attr('x', cursorX + (squareWidth / 2))
+                .attr('y', (cursorY + (squareWidth / 2)) + 5)
+                .text(`${this.RectangleArray[i]}`)
+                .style('fill', 'white')
+                .style("text-anchor", "middle")
             cursorX += squareWidth + 1
-        }
-
-        cursorX = svgWidth / 2 
-        // Level 1 - 3
-        let squareGroupsPerSide = 1
-        let squarePerGroup = 4
-        for(let level = 1; level < 4; ++level) {
-            //Go down per level
-            cursorY = (level * marginY) + 40
-            //Go to the middle of the svg
-            cursorX = (svgWidth / 2)
-
-            //Print Left
-                //Go to left start
-            cursorX -= squareGroupsPerSide * marginX
-            cursorX -= 4 *  squareWidth
-            for(let group = 0; group  < squareGroupsPerSide; ++group) {
-                for(let square = 0; square < squarePerGroup; ++square) {
-                    svgMerge.append('rect')
-                        .attr('x', cursorX)
-                        .attr('y', cursorY)
-                        .attr('width', squareWidth)
-                        .attr('height', squareWidth)
-                    cursorX += squareWidth + 1
-                }
-                cursorX += marginX + 1
-            }
-
-            //Go to the middle of the svg
-            cursorX = (svgWidth / 2)
-
-            //Print Right
-                //Go to right start
-            cursorX += (marginX / 2) + 3
-            for(let group = 0; group  < squareGroupsPerSide; ++group) {
-                for(let square = 0; square < squarePerGroup; ++square) {
-                    svgMerge.append('rect')
-                        .attr('x', cursorX)
-                        .attr('y', cursorY)
-                        .attr('width', squareWidth)
-                        .attr('height', squareWidth)
-                    cursorX += squareWidth + 1
-                }
-                cursorX += marginX
-            }
-
-
-            squareGroupsPerSide *= 2
-            squarePerGroup /= 2
         }
     }
 
@@ -137,69 +99,74 @@ class RenderMerge{
         let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
         let ColorOrderIndex = []
 
-        for(let i = 0; i < this.numOfElements - 1; ++i) {
-            ColorOrderIndex = []
-            for(let c = 0; c < i; ++c) {
-                ColorOrderIndex.push(this.colorDone)
+        const squareWidth = svgWidth / 15
+        const marginX = squareWidth / 2
+        const marginY = squareWidth * 1.5
+        let cursorX = 0
+        let cursorY = 0
+        cursorX = svgWidth / 2 
+        // Level 1 - 3
+        let squareGroupsPerSide = 1
+        let squarePerGroup = 4
+        for(let level = 1; level < 4; ++level) {
+            let SquareIndex = 0
+
+            //Go down per level
+            cursorY = (level * marginY) + 40
+            //Go to the middle of the svg
+            cursorX = (svgWidth / 2)
+
+            //Print Left
+                //Go to left start
+            cursorX -= squareGroupsPerSide * marginX
+            cursorX -= 4 *  squareWidth
+            for(let group = 0; group  < squareGroupsPerSide; ++group) {
+                for(let square = 0; square < squarePerGroup; ++square) {
+                    svgMerge.append('rect')
+                        .attr('x', cursorX)
+                        .attr('y', cursorY)
+                        .attr('width', squareWidth)
+                        .attr('height', squareWidth)
+                    svgMerge.append('text')
+                        .attr('x', cursorX + (squareWidth / 2))
+                        .attr('y', (cursorY + (squareWidth / 2)) + 5)
+                        .text(`${this.RectangleArray[SquareIndex]}`)
+                        .style('fill', 'white')
+                        .style("text-anchor", "middle")
+                    cursorX += squareWidth + 1
+                    ++SquareIndex
+                }
+                cursorX += marginX + 1
             }
-            for(let c = i; c < this.numOfElements; ++c) {
-                ColorOrderIndex.push(this.colorNeutral)
+
+            //Go to the middle of the svg
+            cursorX = (svgWidth / 2)
+
+            //Print Right
+                //Go to right start
+            cursorX += (marginX / 2) + 3
+            for(let group = 0; group  < squareGroupsPerSide; ++group) {
+                for(let square = 0; square < squarePerGroup; ++square) {
+                    svgMerge.append('rect')
+                        .attr('x', cursorX)
+                        .attr('y', cursorY)
+                        .attr('width', squareWidth)
+                        .attr('height', squareWidth)
+                    svgMerge.append('text')
+                        .attr('x', cursorX + (squareWidth / 2))
+                        .attr('y', (cursorY + (squareWidth / 2)) + 5)
+                        .text(`${this.RectangleArray[SquareIndex]}`)
+                        .style('fill', 'white')
+                        .style("text-anchor", "middle")
+                    cursorX += squareWidth + 1
+                    ++SquareIndex
+                }
+                cursorX += marginX
             }
-            this.RectOrderArray.push([...RectOrderIndex])
-            this.ColorOrderArray.push([...ColorOrderIndex])
 
-            for(let j = this.numOfElements - 1; j > i; --j) {
-                ColorOrderIndex = []
-                for(let c = 0; c < i; ++c) {
-                    ColorOrderIndex.push(this.colorDone)
-                }
-                for(let c = i; c < j - 1; ++c) {
-                    ColorOrderIndex.push(this.colorNeutral)
-                }
-                ColorOrderIndex.push(this.colorIndex) // j - 1
-                ColorOrderIndex.push(this.colorIndex) // j
-                for(let c = j; c < this.numOfElements; ++c) {
-                    ColorOrderIndex.push(this.colorNeutral)
-                }
-                this.RectOrderArray.push([...RectOrderIndex])
-                this.ColorOrderArray.push([...ColorOrderIndex])
 
-                if(this.RectangleArray[RectOrderIndex[j]].value < this.RectangleArray[RectOrderIndex[j - 1]].value) {
-                    ColorOrderIndex = []
-                    for(let c = 0; c < i; ++c) {
-                        ColorOrderIndex.push(this.colorDone)
-                    }
-                    for(let c = i; c < j - 1; ++c) {
-                        ColorOrderIndex.push(this.colorNeutral)
-                    }
-                    ColorOrderIndex.push(this.colorSmallerFound) // j - 1
-                    ColorOrderIndex.push(this.colorSmallerFound) // j
-                    for(let c = j; c < this.numOfElements; ++c) {
-                        ColorOrderIndex.push(this.colorNeutral)
-                    }
-                    this.RectOrderArray.push([...RectOrderIndex])
-                    this.ColorOrderArray.push([...ColorOrderIndex])
-
-                    const index = RectOrderIndex[j]
-                    RectOrderIndex[j] = RectOrderIndex[j - 1]
-                    RectOrderIndex[j - 1] = index
-
-                    ColorOrderIndex = []
-                    for(let c = 0; c < i; ++c) {
-                        ColorOrderIndex.push(this.colorDone)
-                    }
-                    for(let c = i; c < j - 1; ++c) {
-                        ColorOrderIndex.push(this.colorNeutral)
-                    }
-                    ColorOrderIndex.push(this.colorSmallerFound) // j - 1
-                    ColorOrderIndex.push(this.colorSmallerFound) // j
-                    for(let c = j; c < this.numOfElements; ++c) {
-                        ColorOrderIndex.push(this.colorNeutral)
-                    }
-                    this.RectOrderArray.push([...RectOrderIndex])
-                    this.ColorOrderArray.push([...ColorOrderIndex])
-                }
-            }
+            squareGroupsPerSide *= 2
+            squarePerGroup /= 2
         }
 
         // End Format
@@ -264,30 +231,21 @@ class RenderMerge{
 }
 
 class MergeRectangle{
-    constructor(key, value) {
-        this.key = key
+    constructor(value) {
         this.value = value
         this.GroupSvg = svgMerge.append('g')
-        // Rectangle SVG
-        // this.RectangleSvg = this.GroupSvg.append('rect')
-        //     .attr('id', `linear-rect-object-${key}`)
-        //     .attr('class', 'rect-object')
-        //     .attr('height', this.yScale(value))
-        //     .attr('width', this.xScale.bandwidth())
-        //     .attr('x', this.xScale(this.key))
-        // Text SVG
-        // this.TextSvg = this.GroupSvg.append('text')
-        //     .attr('y', 20)
-        //     .attr('x', this.xScale(this.key) + 5)
-        //     .text(`${this.value}`)
-        //     .style('fill', 'white')
 
-        this.SquareSvg = this.GroupSvg.append('rect')
-            .attr('id', `merge-rect-object-${key}`)
-            .attr('class', 'square-object')
-            .attr('height', 30)
-            .attr('width', 30)
-            .attr('x', this.xScale(this.key))
+        svgMerge.append('rect')
+            .attr('x', cursorX)
+            .attr('y', cursorY)
+            .attr('width', squareWidth)
+            .attr('height', squareWidth)
+        svgMerge.append('text')
+            .attr('x', cursorX + (squareWidth / 2))
+            .attr('y', (cursorY + (squareWidth / 2)) + 5)
+            .text(`${this.RectangleArray[SquareIndex]}`)
+            .style('fill', 'white')
+            .style("text-anchor", "middle")
     }
     
     yScale = d3.scaleLinear()
