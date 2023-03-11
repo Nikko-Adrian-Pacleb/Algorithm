@@ -7,7 +7,7 @@ const svgMerge = d3.select('#vis-svg-merge')
 const maxValMerge = 50
 const minValMerge = 10
 
-const squareWidth = svgWidth / 15
+const squareWidth = svgWidth / 12
 const marginX = squareWidth / 2
 const marginY = squareWidth * 1.5
 let cursorX = 0
@@ -107,28 +107,30 @@ class RenderMerge{
     }
     
     MergeSortRecursion(array, p, r, indexCursorX, indexCursorY, direction) {
+        console.log(p, r)
         if(p >= r) {
             return
         }
         const thisRecursionNumberOfElements = r - p + 1
+        let thisRecursionStartingPoint
         let thisRecursionCursorX = indexCursorX
-        let thisRecursionCursorY = indexCursorY
         let thisRecursionSquareArray = []
         //Visuals
         if(direction == 'left') {
-            thisRecursionCursorX -= marginX + (thisRecursionNumberOfElements * svgWidth) + thisRecursionNumberOfElements
+            thisRecursionCursorX -= marginX + (thisRecursionNumberOfElements * squareWidth) + thisRecursionNumberOfElements
         }
-        
-        
-        for(let squareNumber = p; squareNumber < r + 1; ++squareNumber) {
-            new MergeRectangle(array[squareNumber], RindexCursorX, cursorY)
-            RindexCursorX += squareWidth + 1
+        else {
+            thisRecursionCursorX += marginX
+        }
+        thisRecursionStartingPoint = thisRecursionCursorX 
+        for(let squareNumber = p; squareNumber <= r; ++squareNumber) {
+            new MergeRectangle(array[squareNumber], thisRecursionCursorX, indexCursorY)
+            thisRecursionCursorX += squareWidth + 1
         }
         const q = Math.floor((p + r) / 2)
-        recursionCursorY += squareWidth + 20 
-        this.MergeSortRecursion(array, p, q, , recursionCursorY)
-        recursionCursorX += marginX
-        this.MergeSortRecursion(array, q + 1, r, (recursionCursorX / 2) + marginX, recursionCursorY)
+        const thisRecursionMidPointX = (thisRecursionStartingPoint + thisRecursionCursorX) / 2
+        this.MergeSortRecursion(array, p, q, thisRecursionMidPointX , indexCursorY + marginY, 'left')
+        this.MergeSortRecursion(array, q + 1, r, thisRecursionMidPointX, indexCursorY + marginY, 'right')
     
         //Delete Square Arrays Before Merge
         // this.Merge(array, p, q, r)
@@ -137,7 +139,7 @@ class RenderMerge{
     MergeSort(array) {
         cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
         cursorY = 40 //40 is the margin from the top
-        this.MergeSortRecursion(array, 0, array.length - 1, cursorX)
+        this.MergeSortRecursion(array, 0, array.length - 1, cursorX, cursorY)
         return array
     }
 
