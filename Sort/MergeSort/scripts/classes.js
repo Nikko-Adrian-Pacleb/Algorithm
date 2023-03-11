@@ -106,13 +106,20 @@ class RenderMerge{
         }
     }
     
-    MergeSortRecursion(array, p, r, indexCursorX, ) {
+    MergeSortRecursion(array, p, r, indexCursorX, indexCursorY, direction) {
         if(p >= r) {
             return
         }
+        const thisRecursionNumberOfElements = r - p + 1
+        let thisRecursionCursorX = indexCursorX
+        let thisRecursionCursorY = indexCursorY
+        let thisRecursionSquareArray = []
         //Visuals
-
-        let RindexCursorX = ((svgWidth / 2) - ((this.numOfElements / 2) * squareWidth)) + (p * squareWidth)
+        if(direction == 'left') {
+            thisRecursionCursorX -= marginX + (thisRecursionNumberOfElements * svgWidth) + thisRecursionNumberOfElements
+        }
+        
+        
         for(let squareNumber = p; squareNumber < r + 1; ++squareNumber) {
             new MergeRectangle(array[squareNumber], RindexCursorX, cursorY)
             RindexCursorX += squareWidth + 1
@@ -123,6 +130,7 @@ class RenderMerge{
         recursionCursorX += marginX
         this.MergeSortRecursion(array, q + 1, r, (recursionCursorX / 2) + marginX, recursionCursorY)
     
+        //Delete Square Arrays Before Merge
         // this.Merge(array, p, q, r)
     }
     
