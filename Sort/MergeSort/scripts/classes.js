@@ -107,7 +107,6 @@ class RenderMerge{
     }
     
     MergeSortRecursion(array, p, r, indexCursorX, indexCursorY, direction) {
-        console.log(p, r)
         if(p >= r) {
             return
         }
@@ -124,107 +123,37 @@ class RenderMerge{
         }
         thisRecursionStartingPoint = thisRecursionCursorX 
         for(let squareNumber = p; squareNumber <= r; ++squareNumber) {
-            new MergeRectangle(array[squareNumber], thisRecursionCursorX, indexCursorY)
+            const newSquare = new MergeRectangle(array[squareNumber], thisRecursionCursorX, indexCursorY)
             thisRecursionCursorX += squareWidth + 1
+
+            thisRecursionSquareArray.push(newSquare)
         }
         const q = Math.floor((p + r) / 2)
         const thisRecursionMidPointX = (thisRecursionStartingPoint + thisRecursionCursorX) / 2
-        this.MergeSortRecursion(array, p, q, thisRecursionMidPointX , indexCursorY + marginY, 'left')
-        this.MergeSortRecursion(array, q + 1, r, thisRecursionMidPointX, indexCursorY + marginY, 'right')
-    
+        
+        const leftRecurssionArray = this.MergeSortRecursion(array, p, q, thisRecursionMidPointX , indexCursorY + marginY, 'left')
+        console.log(leftRecurssionArray)
+
+        const rightRecursionArray = this.MergeSortRecursion(array, q + 1, r, thisRecursionMidPointX, indexCursorY + marginY, 'right')
+        console.log(rightRecursionArray)
+        
         //Delete Square Arrays Before Merge
         // this.Merge(array, p, q, r)
+
+        return thisRecursionSquareArray
     }
     
     MergeSort(array) {
         cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
         cursorY = 40 //40 is the margin from the top
-        this.MergeSortRecursion(array, 0, array.length - 1, cursorX, cursorY)
+        const Level0Array = this.MergeSortRecursion(array, 0, array.length - 1, cursorX, cursorY)
+        console.log(Level0Array)
         return array
     }
 
     // Generate the steps for colors and rect positions
     GetStepsColor() {
-        // Initial Format
-        // this.RectOrderArray.push(Array.from(Array(this.numOfElements).keys()))
-        // this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
-
-        // let RectOrderIndex = [...this.RectOrderArray[this.RectOrderArray.length - 1]]
-        // let ColorOrderIndex = []
-
-        // const squareWidth = svgWidth / 15
-        // const marginX = squareWidth / 2
-        // const marginY = squareWidth * 1.5
-        // let cursorX = 0
-        // let cursorY = 0
-        // cursorX = svgWidth / 2 
-        // // Level 1 - 3
-        // let squareGroupsPerSide = 1
-        // let squarePerGroup = 4
-        // for(let level = 1; level < 4; ++level) {
-        //     let SquareIndex = 0
-
-        //     //Go down per level
-        //     cursorY = (level * marginY) + 40
-        //     //Go to the middle of the svg
-        //     cursorX = (svgWidth / 2)
-
-        //     //Print Left
-        //         //Go to left start
-        //     cursorX -= squareGroupsPerSide * marginX
-        //     cursorX -= 4 *  squareWidth
-        //     for(let group = 0; group  < squareGroupsPerSide; ++group) {
-        //         for(let square = 0; square < squarePerGroup; ++square) {
-        //             svgMerge.append('rect')
-        //                 .attr('x', cursorX)
-        //                 .attr('y', cursorY)
-        //                 .attr('width', squareWidth)
-        //                 .attr('height', squareWidth)
-        //             svgMerge.append('text')
-        //                 .attr('x', cursorX + (squareWidth / 2))
-        //                 .attr('y', (cursorY + (squareWidth / 2)) + 5)
-        //                 .text(`${this.RectangleArray[SquareIndex]}`)
-        //                 .style('fill', 'white')
-        //                 .style("text-anchor", "middle")
-        //             cursorX += squareWidth + 1
-        //             ++SquareIndex
-        //         }
-        //         cursorX += marginX + 1
-        //     }
-
-        //     //Go to the middle of the svg
-        //     cursorX = (svgWidth / 2)
-
-        //     //Print Right
-        //         //Go to right start
-        //     cursorX += (marginX / 2) + 3
-        //     for(let group = 0; group  < squareGroupsPerSide; ++group) {
-        //         for(let square = 0; square < squarePerGroup; ++square) {
-        //             svgMerge.append('rect')
-        //                 .attr('x', cursorX)
-        //                 .attr('y', cursorY)
-        //                 .attr('width', squareWidth)
-        //                 .attr('height', squareWidth)
-        //             svgMerge.append('text')
-        //                 .attr('x', cursorX + (squareWidth / 2))
-        //                 .attr('y', (cursorY + (squareWidth / 2)) + 5)
-        //                 .text(`${this.RectangleArray[SquareIndex]}`)
-        //                 .style('fill', 'white')
-        //                 .style("text-anchor", "middle")
-        //             cursorX += squareWidth + 1
-        //             ++SquareIndex
-        //         }
-        //         cursorX += marginX
-        //     }
-
-
-        //     squareGroupsPerSide *= 2
-        //     squarePerGroup /= 2
-        // }
-
-        // // End Format
-        // this.RectOrderArray.push([...this.RectOrderArray[this.RectOrderArray.length - 1]])
-        // this.ColorOrderArray.push(Array(this.numOfElements).fill(this.colorNeutral))
+        
     }
 
     //Increment Step Number and Render the next step
@@ -307,5 +236,10 @@ class MergeRectangle{
     RenderColor(color) {
         this.RectangleSvg
             .attr('fill', color)
+    }
+
+    DeleteSvg() {
+        this.GroupSvg.selectAll('*').remove()
+        this.GroupSvg.remove()
     }
 }
