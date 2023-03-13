@@ -11,8 +11,8 @@ const squareWidth = svgWidth / 12
 const marginX = squareWidth / 2
 const marginY = squareWidth * 1.5
 
-let cursorX = 0
-let cursorY = 0
+// let cursorX = 0
+// let cursorY = 0
 
 class RenderMerge{
     //Constants
@@ -30,9 +30,9 @@ class RenderMerge{
     // rectObjArray = [] // Array of Rectangle SVG
     // stepsObjArray = [] //Array of Steps Object
     StepNumber = 0
-    RectangleArray = []
+    SquareleArray = []
     ColorOrderArray = []
-    RectOrderArray = []
+    SquareOrderArray = []
 
     constructor() {
 
@@ -52,10 +52,12 @@ class RenderMerge{
     
     //Create RectObjs and save it to array
     CreateRectangles() {
+        const cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
+        const cursorY = 40 //40 is the margin from the top
         for(let i = 0; i < this.numOfElements; ++i) {
-            this.RectangleArray.push(Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge)
+            this.SquareleArray.push(new MergeRectangle(Math.floor(Math.random() * (maxValMerge - minValMerge)) + minValMerge), cursorX, cursorY)
         }
-        console.log(this.RectangleArray)
+        // console.log(this.RectangleArray)
         this.MergeSort(this.RectangleArray)
     }
 
@@ -74,7 +76,7 @@ class RenderMerge{
         // this.RenderRectangleOrder(this.StepNumber)
     }
 
-    Merge(parentArray, leftArray, rightArray, p, q, r) {
+    Merge(array, p, q, r) {
         const mergedArray = []
         let i = 0; //i indexes the smallest remaining element in L[]
         let j = 0; //j indexes the smallest remaining element in R[]
@@ -145,10 +147,9 @@ class RenderMerge{
     }
     
     MergeSort(array) {
-        cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
-        cursorY = 40 //40 is the margin from the top
-        const Level0Array = this.MergeSortRecursion(array, 0, array.length - 1, cursorX, cursorY)
-        console.log(Level0Array)
+        const cursorX = (svgWidth / 2) - ((squareWidth * 4) + 7)
+        const cursorY = 40 //40 is the margin from the top
+        this.MergeSortRecursion(array, 0, array.length - 1, cursorX, cursorY)
         return array
     }
 
@@ -200,18 +201,16 @@ class RenderMerge{
 }
 
 class MergeRectangle{
-    constructor(value, mrcursorX, mrcursorY) {
+    constructor(value) {
         this.value = value
         this.mrcursorX = mrcursorX
         this.mrcursorY = mrcursorY
         this.GroupSvg = svgMerge.append('g')
 
         this.SquareSvg = this.GroupSvg.append('rect')
-            .attr('x', this.mrcursorX)
-            .attr('y', this.mrcursorY)
             .attr('width', squareWidth)
             .attr('height', squareWidth)
-        this.SquareSvg = this.GroupSvg.append('text')
+        this.SquareText = this.GroupSvg.append('text')
             .attr('x', this.mrcursorX + (squareWidth / 2))
             .attr('y', (this.mrcursorY + (squareWidth / 2)) + 5)
             .text(`${this.value}`)
@@ -229,13 +228,17 @@ class MergeRectangle{
         .paddingInner(0.12)
 
 
-    RenderRect(xPos){
-	    this.RectangleSvg.transition()
-            .attr('x', this.xScale(xPos))
+    RenderRect(xPos, yPos){
+	    this.SquareSvg.transition()
+            .attr('x', xPos)
+            .attr('y', yPos)
+        this.SquareText.transition()
+            .attr('x', xPos)
+            .attr('y', yPos)
     }
 
     RenderColor(color) {
-        this.RectangleSvg
+        this.SquareSvgSvg
             .attr('fill', color)
     }
 
