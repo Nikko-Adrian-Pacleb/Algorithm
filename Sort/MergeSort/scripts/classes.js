@@ -10,6 +10,7 @@ const minValMerge = 10
 const squareWidth = svgWidth / 12
 const marginX = squareWidth / 2
 const marginY = squareWidth * 1.5
+
 let cursorX = 0
 let cursorY = 0
 
@@ -73,36 +74,32 @@ class RenderMerge{
         // this.RenderRectangleOrder(this.StepNumber)
     }
 
-    Merge(leftArray, rightArray, p, q, r) {
+    Merge(parentArray, leftArray, rightArray, p, q, r) {
         const mergedArray = []
         let i = 0; //i indexes the smallest remaining element in L[]
         let j = 0; //j indexes the smallest remaining element in R[]
-        let k = 0; //k indexes the location in A[]
         // console.log(k)
         //While for comparing
         while(i < leftArray.length && j < rightArray.length){
             if(leftArray[i] < rightArray[j]){
-                array.push(leftArray[i])
+                mergedArray.push(leftArray[i])
                 array[k] = leftArray[i]
                 ++i
             }
             else {
-                array[k] = rightArray[j]
+                mergedArray = rightArray[j]
                 ++j
             }
-            ++k
         }
     
         //While for remainders
         while(i < leftArray.length){
-            array[k] = leftArray[i]
+            mergedArray.push(leftArray[i])
             ++i
-            ++k
         }
         while(j < rightArray.length){
-            array[k] = rightArray[j]
+            mergedArray.push(rightArray[i])
             ++j
-            ++k
         }
     }
     
@@ -142,9 +139,9 @@ class RenderMerge{
         console.log(rightRecursionArray)
         
         // Delete Square Arrays Before Merge
-        this.Merge(leftRecurssionArray, rightRecursionArray, p, q, r)
+        this.Merge(thisRecursionSquareArray, leftRecurssionArray, rightRecursionArray, p, q, r)
 
-        return thisRecursionSquareArray
+        // return thisRecursionSquareArray
     }
     
     MergeSort(array) {
