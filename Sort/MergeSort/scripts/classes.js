@@ -73,16 +73,16 @@ class RenderMerge{
         // this.RenderRectangleOrder(this.StepNumber)
     }
 
-    Merge(array, p, q, r) {
-        const leftArray = array.slice(p, q + 1)
-        const rightArray = array.slice(q + 1, r + 1)
+    Merge(leftArray, rightArray, p, q, r) {
+        const mergedArray = []
         let i = 0; //i indexes the smallest remaining element in L[]
         let j = 0; //j indexes the smallest remaining element in R[]
-        let k = p; //k indexes the location in A[]
+        let k = 0; //k indexes the location in A[]
         // console.log(k)
         //While for comparing
         while(i < leftArray.length && j < rightArray.length){
             if(leftArray[i] < rightArray[j]){
+                array.push(leftArray[i])
                 array[k] = leftArray[i]
                 ++i
             }
@@ -107,13 +107,11 @@ class RenderMerge{
     }
     
     MergeSortRecursion(array, p, r, indexCursorX, indexCursorY, direction) {
-        if(p >= r) {
-            return
-        }
         const thisRecursionNumberOfElements = r - p + 1
         let thisRecursionStartingPoint
         let thisRecursionCursorX = indexCursorX
         let thisRecursionSquareArray = []
+        
         //Visuals
         if(direction == 'left') {
             thisRecursionCursorX -= marginX + (thisRecursionNumberOfElements * squareWidth) + thisRecursionNumberOfElements
@@ -128,6 +126,12 @@ class RenderMerge{
 
             thisRecursionSquareArray.push(newSquare)
         }
+        
+        if(p >= r) {
+            return
+        }
+        
+        
         const q = Math.floor((p + r) / 2)
         const thisRecursionMidPointX = (thisRecursionStartingPoint + thisRecursionCursorX) / 2
         
@@ -137,8 +141,8 @@ class RenderMerge{
         const rightRecursionArray = this.MergeSortRecursion(array, q + 1, r, thisRecursionMidPointX, indexCursorY + marginY, 'right')
         console.log(rightRecursionArray)
         
-        //Delete Square Arrays Before Merge
-        // this.Merge(array, p, q, r)
+        // Delete Square Arrays Before Merge
+        this.Merge(leftRecurssionArray, rightRecursionArray, p, q, r)
 
         return thisRecursionSquareArray
     }
