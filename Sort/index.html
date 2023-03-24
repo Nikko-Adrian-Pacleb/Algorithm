@@ -1,119 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/index.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/index.css" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>Sort Algorithm</title>
-</head>
-<body>
+  </head>
+  <body>
     <header id="nav-bar">
-        <a href="https://nikko-adrian-pacleb.github.io/Algorithm/"><img src="../images/Vector.svg" alt="AltViz-Logo"></a>
-        
-        <!-- <nav id="nav-bar-nav">
+      <a href="https://nikko-adrian-pacleb.github.io/Algorithm/"
+        ><img src="../images/Vector.svg" alt="AltViz-Logo"
+      /></a>
+
+      <!-- <nav id="nav-bar-nav">
             <a href="">Algorithms</a>
             <a href="">About</a>
             <a href="">Developer</a>
         </nav> -->
     </header>
     <div id="sort-container" class="subject-container">
-        <main id="site-main">
-            <article id="site-article">
-                <header id="site-header">
-                    <h1 id="article-title">Sort Algorithm</h1>
-                </header>
-                <nav id="insite-nav">
-                    <h3 id="insite-nav-header">Contents</h3>
-                    <ul>
-                        <li><a href="">About Sort Algorithm</a></li>
-                        <li><a href="">Insertion Sort</a></li>
-                        <li><a href="">Selection Sort</a></li>
-                        <li><a href="">Bubble Sort</a></li>
-                        <li><a href="">Merge Sort</a></li>
-                    </ul>
-                </nav>
-                <section id="sort-algorithm" class="subject-section">
-                    <h3 class="section-title">About Sort Algorithm</h3>
-                    <!-- <div class="vis-container">
+      <main id="site-main">
+        <article id="site-article">
+          <header id="site-header">
+            <h1 id="article-title">Sort Algorithm</h1>
+          </header>
+          <nav id="insite-nav">
+            <h3 id="insite-nav-header">Contents</h3>
+            <ul>
+              <li><a href="">About Sort Algorithm</a></li>
+              <li><a href="">Insertion Sort</a></li>
+              <li><a href="">Selection Sort</a></li>
+              <li><a href="">Bubble Sort</a></li>
+              <li><a href="">Merge Sort</a></li>
+            </ul>
+          </nav>
+          <section id="sort-algorithm" class="subject-section">
+            <h3 class="section-title">About Sort Algorithm</h3>
+            <!-- <div class="vis-container">
                         <svg id ="vis-svg-about" class="vis-svg">
 
                         </svg>
                     </div> -->
-                    <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo pariatur qui natus officiis magni culpa vero, sit expedita sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero deleniti. Laborum, aut.</p>
-                </section>
-                <!-- Insertion Sort -->
-                <section id="insertion-sort-algorithm" class="subject-section">
-                    <h3 class="section-title">Insertion Sort</h3>
-                    <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem id eum aspernatur suscipit incidunt accusamus explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis quisquam vitae cumque repellendus optio!</p>
-                    <div class="vis-container">
-                        <div class="vis-svg-container">
-                            <svg id ="vis-svg-insertion" width="900" height="510" class="vis-svg">
-
-                            </svg>
-                            
-                        </div><div class="vis-extra">
-                            <button class="vis-extra-button" id="insertion-vis-extra-button-reset" onclick="InsertionReset()">Reset</button>
-                            <span>Generate a new set of elements</span>
-                            <br>
-                            <button class="vis-extra-button" id="insertion-vis-extra-button-previous" onclick="InsertionPrevious()">Previous</button>
-                            <!-- <span id="linear-vis-extra-span-current-step">0</span>
+            <p class="site-paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga illo
+              pariatur qui natus officiis magni culpa vero, sit expedita
+              sapiente sed, nesciunt harum blanditiis temporibus nostrum, libero
+              deleniti. Laborum, aut.
+            </p>
+          </section>
+          <!-- Insertion Sort -->
+          <section id="insertion-sort-algorithm" class="subject-section">
+            <h3 class="section-title">Insertion Sort</h3>
+            <p class="site-paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Exercitationem id eum aspernatur suscipit incidunt accusamus
+              explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis
+              quisquam vitae cumque repellendus optio!
+            </p>
+            <div class="vis-container">
+              <div class="vis-svg-container">
+                <svg
+                  id="vis-svg-insertion"
+                  width="900"
+                  height="510"
+                  class="vis-svg"
+                ></svg>
+              </div>
+              <div class="vis-extra">
+                <button
+                  class="vis-extra-button"
+                  id="insertion-vis-extra-button-reset"
+                  onclick="InsertionReset()"
+                >
+                  Reset
+                </button>
+                <span>Generate a new set of elements</span>
+                <br />
+                <button
+                  class="vis-extra-button"
+                  id="insertion-vis-extra-button-previous"
+                  onclick="InsertionPrevious()"
+                >
+                  Previous
+                </button>
+                <!-- <span id="linear-vis-extra-span-current-step">0</span>
                             <span>/</span>
                             <span id="linear-vis-extra-span-total-steps">0</span> -->
-                            <button class="vis-extra-button" id="insertion-vis-extra-button-next" onclick="InsertionNext()">Next</button>
-                        </div>
-                        <script src="./InsertionSort/scripts/classes.js"></script>
-                        <script src="./InsertionSort/scripts/index.js"></script>
-                    </div>
-                </section>
-                <section id="selection-sort-algorithm" class="subject-section">
-                    <h3 class="section-title">Selection Sort</h3>
-                    <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem id eum aspernatur suscipit incidunt accusamus explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis quisquam vitae cumque repellendus optio!</p>
-                    <div class="vis-container">
-                        <div class="vis-svg-container">
-                            <svg id ="vis-svg-selection" width="900" height="510" class="vis-svg">
-
-                            </svg>
-                            
-                        </div><div class="vis-extra">
-                            <button class="vis-extra-button" id="selection-vis-extra-button-reset" onclick="SelectionReset()">Reset</button>
-                            <span>Generate a new set of elements</span>
-                            <br>
-                            <button class="vis-extra-button" id="selection-vis-extra-button-previous" onclick="SelectionPrevious()">Previous</button>
-                            <!-- <span id="linear-vis-extra-span-current-step">0</span>
+                <button
+                  class="vis-extra-button"
+                  id="insertion-vis-extra-button-next"
+                  onclick="InsertionNext()"
+                >
+                  Next
+                </button>
+              </div>
+              <script src="./InsertionSort/scripts/classes.js"></script>
+              <script src="./InsertionSort/scripts/index.js"></script>
+            </div>
+          </section>
+          <section id="selection-sort-algorithm" class="subject-section">
+            <h3 class="section-title">Selection Sort</h3>
+            <p class="site-paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Exercitationem id eum aspernatur suscipit incidunt accusamus
+              explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis
+              quisquam vitae cumque repellendus optio!
+            </p>
+            <div class="vis-container">
+              <div class="vis-svg-container">
+                <svg
+                  id="vis-svg-selection"
+                  width="900"
+                  height="510"
+                  class="vis-svg"
+                ></svg>
+              </div>
+              <div class="vis-extra">
+                <button
+                  class="vis-extra-button"
+                  id="selection-vis-extra-button-reset"
+                  onclick="SelectionReset()"
+                >
+                  Reset
+                </button>
+                <span>Generate a new set of elements</span>
+                <br />
+                <button
+                  class="vis-extra-button"
+                  id="selection-vis-extra-button-previous"
+                  onclick="SelectionPrevious()"
+                >
+                  Previous
+                </button>
+                <!-- <span id="linear-vis-extra-span-current-step">0</span>
                             <span>/</span>
                             <span id="linear-vis-extra-span-total-steps">0</span> -->
-                            <button class="vis-extra-button" id="selection-vis-extra-button-next" onclick="SelectionNext()">Next</button>
-                        </div>
-                        <script src="./SelectionSort/scripts/classes.js"></script>
-                        <script src="./SelectionSort/scripts/index.js"></script>
-                    </div>
-                </section>
-                <section id="bubble-sort-algorithm" class="subject-section">
-                    <h3 class="section-title">Bubble Sort</h3>
-                    <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem id eum aspernatur suscipit incidunt accusamus explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis quisquam vitae cumque repellendus optio!</p>
-                    <div class="vis-container">
-                        <div class="vis-svg-container">
-                            <svg id ="vis-svg-bubble" width="900" height="510" class="vis-svg">
-
-                            </svg>
-                            
-                        </div><div class="vis-extra">
-                            <button class="vis-extra-button" id="bubble-vis-extra-button-reset" onclick="BubbleReset()">Reset</button>
-                            <span>Generate a new set of elements</span>
-                            <br>
-                            <button class="vis-extra-button" id="bubble-vis-extra-button-previous" onclick="BubblePrevious()">Previous</button>
-                            <!-- <span id="linear-vis-extra-span-current-step">0</span>
+                <button
+                  class="vis-extra-button"
+                  id="selection-vis-extra-button-next"
+                  onclick="SelectionNext()"
+                >
+                  Next
+                </button>
+              </div>
+              <script src="./SelectionSort/scripts/classes.js"></script>
+              <script src="./SelectionSort/scripts/index.js"></script>
+            </div>
+          </section>
+          <section id="bubble-sort-algorithm" class="subject-section">
+            <h3 class="section-title">Bubble Sort</h3>
+            <p class="site-paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Exercitationem id eum aspernatur suscipit incidunt accusamus
+              explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis
+              quisquam vitae cumque repellendus optio!
+            </p>
+            <div class="vis-container">
+              <div class="vis-svg-container">
+                <svg
+                  id="vis-svg-bubble"
+                  width="900"
+                  height="510"
+                  class="vis-svg"
+                ></svg>
+              </div>
+              <div class="vis-extra">
+                <button
+                  class="vis-extra-button"
+                  id="bubble-vis-extra-button-reset"
+                  onclick="BubbleReset()"
+                >
+                  Reset
+                </button>
+                <span>Generate a new set of elements</span>
+                <br />
+                <button
+                  class="vis-extra-button"
+                  id="bubble-vis-extra-button-previous"
+                  onclick="BubblePrevious()"
+                >
+                  Previous
+                </button>
+                <!-- <span id="linear-vis-extra-span-current-step">0</span>
                             <span>/</span>
                             <span id="linear-vis-extra-span-total-steps">0</span> -->
-                            <button class="vis-extra-button" id="bubble-vis-extra-button-next" onclick="BubbleNext()">Next</button>
-                        </div>
-                        <script src="./BubbleSort/scripts/classes.js"></script>
-                        <script src="./BubbleSort/scripts/index.js"></script>
-                    </div>
-                </section>
-                <section id="merge-sort-algorithm" class="subject-section">
+                <button
+                  class="vis-extra-button"
+                  id="bubble-vis-extra-button-next"
+                  onclick="BubbleNext()"
+                >
+                  Next
+                </button>
+              </div>
+              <script src="./BubbleSort/scripts/classes.js"></script>
+              <script src="./BubbleSort/scripts/index.js"></script>
+            </div>
+          </section>
+          <!-- <section id="merge-sort-algorithm" class="subject-section">
                     <h3 class="section-title">Merge Sort</h3>
                     <p class="site-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem id eum aspernatur suscipit incidunt accusamus explicabo! Distinctio quo, dolores hic ipsum odio quas non debitis quisquam vitae cumque repellendus optio!</p>
                     <div class="vis-container">
@@ -127,20 +212,18 @@
                             <span>Generate a new set of elements</span>
                             <br>
                             <button class="vis-extra-button" id="merge-vis-extra-button-previous" onclick="MergePrevious()">Previous</button>
-                            <!-- <span id="linear-vis-extra-span-current-step">0</span>
+                            <span id="linear-vis-extra-span-current-step">0</span>
                             <span>/</span>
-                            <span id="linear-vis-extra-span-total-steps">0</span> -->
+                            <span id="linear-vis-extra-span-total-steps">0</span>
                             <button class="vis-extra-button" id="merge-vis-extra-button-next" onclick="MergeNext()">Next</button>
                         </div>
-                            <!-- <script src="./LinearSearch/scripts/classes.js"></script>
-                            <script src="./LinearSearch/scripts/index.js"></script> -->
+                            <script src="./LinearSearch/scripts/classes.js"></script>
+                            <script src="./LinearSearch/scripts/index.js"></script>
                     </div>
-                </section>
-            </article>
-        </main>
+                </section> -->
+        </article>
+      </main>
     </div>
-    <footer id="footer">
-
-    </footer>
-</body>
+    <footer id="footer"></footer>
+  </body>
 </html>
