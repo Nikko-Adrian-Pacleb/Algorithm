@@ -4,9 +4,9 @@ const maxValLinear = 50;
 const minValLinear = 20;
 
 class RenderLinear {
-  colorNeutral = "#F2E205";
-  colorIndex = "#F2A71B";
-  colorFound = "#277FF2";
+  colorNeutral = "#1AD9B6";
+  colorIndex = "#0DA68A";
+  colorFound = "#BF2626";
 
   ValueToFind = 35;
 
