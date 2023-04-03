@@ -15,6 +15,7 @@ class RenderBinary {
   RectangleArray = [];
   StepsColor = [];
 
+  foundIndex = -1;
   constructor() {}
 
   //Remove RectSVG Elements on the DOM and Clear RectObjArray
@@ -61,7 +62,13 @@ class RenderBinary {
     this.StepsColor = [];
     this.GetStepsColor();
     // console.log(this.StepsColor)
-    this.RenderStepsColor(0);
+    if (this.foundIndex != -1) {
+      this.StepNumber = this.foundIndex;
+      this.RenderStepsColor(this.foundIndex);
+    } else {
+      this.StepNumber = this.StepsColor.length - 1;
+      this.RenderStepsColor(this.StepsColor.length - 1);
+    }
   }
 
   //Generate the steps for colors and rect positions
@@ -77,7 +84,9 @@ class RenderBinary {
     if (this.BinarySearch(0, 10) != -1) {
       found = true;
     }
-
+    if (!found) {
+      this.foundIndex = -1;
+    }
     return found;
   }
 
@@ -109,6 +118,8 @@ class RenderBinary {
       this.StepsColor.push([...tempStepsColor]);
 
       if (this.RectangleArray[mid].value == this.ValueToFind) {
+        this.foundIndex = this.StepsColor.length;
+
         for (let i = 0; i < 10; ++i) {
           if (i == mid) {
             tempStepsColor[i] = this.colorFound;
